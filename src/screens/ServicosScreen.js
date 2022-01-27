@@ -15,7 +15,7 @@ const data = [
     timeInfo:"2 horas atrás",
     image:""},
     {id: 2,
-      title:"Procuro Serviço de Design de Marceneiro",
+      title:"Procuro Serviço de Marceneiro",
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget\
     rutrum diam. Curabitur consectetur suscipit urna, et accumsan sapien dapibus id. Sed id ornare diam.",
     timeInfo:"1 horas atrás",
@@ -27,7 +27,7 @@ const data = [
     timeInfo:"2 horas atrás",
     image:""},
     {id: 4,
-    title:"Procuro Serviço de Design de Marceneiro",
+    title:"Procuro Serviço de Marceneiro",
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget\
     rutrum diam. Curabitur consectetur suscipit urna, et accumsan sapien dapibus id. Sed id ornare diam.",
     timeInfo:"1 horas atrás",
@@ -39,7 +39,7 @@ const data = [
     timeInfo:"2 horas atrás",
     image:""},
     {id: 6,
-    title:"Procuro Serviço de Design de Marceneiro",
+    title:"Procuro Serviço de Marceneiro",
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget\
     rutrum diam. Curabitur consectetur suscipit urna, et accumsan sapien dapibus id. Sed id ornare diam.",
     timeInfo:"1 horas atrás",
