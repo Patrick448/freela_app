@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StatusBar as RNStatusBar} from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
-import { FlatList, ScrollView } from 'react-native';
+import { FlatList, ScrollView, Dimensions } from 'react-native';
 import ListItem from '../components/ListItem';
+import { TabBg } from '../components/TabBg';
 import TextSwitch from '../components/TextSwitch';
 import Colors from '../constants/Colors';
 
@@ -58,9 +59,12 @@ const ServicosScreen = props=> {
         onItem0Selected={()=>{console.log("0")}} 
         onItem1Selected={()=>{console.log("1")}}/>
       </View>
+
+      
      
         
         <FlatList
+        contentContainerStyle={{paddingBottom:30}}
         data={data}
         renderItem={({item})=> 
                   (<ListItem 
@@ -69,6 +73,10 @@ const ServicosScreen = props=> {
                   timeInfo={item.timeInfo}
                   image={item.image}/>)}
           keyExtractor={(item) => item.id}/>    
+
+<View style={{position:'absolute', bottom:0}}>
+        <TabBg />
+      </View>
     </View>
 
     
