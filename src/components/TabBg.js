@@ -10,7 +10,8 @@ export const TabBg= ({
     ...props      
   }) => {      
     return (      
-      <Svg      
+      <Svg
+      
         width={1000}      
         height={61}      
         viewBox="0 0 1000 50"      
@@ -26,7 +27,7 @@ export const TabBg= ({
                     y="0"
                     width={size}
                     height="100%"
-                    fill="url(#grad)"
+                  
                 />   
                 { /*<Circle fill="black" cx="130" cy="50%" r="30" />*/}
                 <Path
@@ -35,7 +36,7 @@ export const TabBg= ({
                         c 4.1 0 7.4 3.1 7.9 7.1
                         C 10 21.7 22.5 33 37.7 33 
                         c 15.2 0 27.7-11.3 29.7-25.9.5-4 3.9-7.1 7.9-7.1 h-.1 z"      
-                    fill="url(#grad)"      
+                          
                 />
 
                 <Rect
@@ -43,7 +44,7 @@ export const TabBg= ({
                     y="0"
                     width={size}
                     height="100%"
-                    fill="url(#grad)"
+                   
                 /> 
             </ClipPath>
          

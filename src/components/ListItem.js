@@ -4,9 +4,11 @@ import Colors from '../constants/Colors';
 
  const ListItem = props => {
 
+   console.log(props);
+
   return (
 
-    <TouchableNativeFeedback useForeground={true}>
+    <TouchableNativeFeedback useForeground={true} onPress={ props.onPress ? () =>props.onPress(props.id) : ()=>{}}>
     <View style={styles.container}>
       <View><Text style={styles.timeInfoText}>{props.timeInfo}</Text></View>
 

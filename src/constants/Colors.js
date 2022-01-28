@@ -5,6 +5,7 @@ export default {
     secondaryAccentColor: '#808080',
 
     white: '#FFFFFF',
+    darkGray: '#263238',
     lightGray: '#E0E0E0',
     green: '#00cc00',
     yellow: '#ffcf11',

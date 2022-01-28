@@ -48,6 +48,10 @@ const data = [
 
 
 const ServicosScreen = props=> {
+
+
+const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -64,19 +68,19 @@ const ServicosScreen = props=> {
      
         
         <FlatList
-        contentContainerStyle={{paddingBottom:30}}
+        contentContainerStyle={{paddingBottom:70}}
         data={data}
         renderItem={({item})=> 
                   (<ListItem 
+                  onPress={onItemPress}
                   title={item.title}
                   body={item.body}
                   timeInfo={item.timeInfo}
-                  image={item.image}/>)}
+                  image={item.image}
+                  id={item.id}/>)}
           keyExtractor={(item) => item.id}/>    
 
-<View style={{position:'absolute', bottom:0}}>
-        <TabBg />
-      </View>
+ 
     </View>
 
     
@@ -93,4 +97,16 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
     //justifyContent: 'center',
   },
+
+  bottomTabBg:{
+    shadowColor: "#000",      
+    shadowOffset: {      
+      width: 0,      
+      height: 1,      
+    },      
+    shadowOpacity: 0.1,      
+    shadowRadius: 2.22, 
+    position:'absolute',
+    bottom:0
+  }
 });
