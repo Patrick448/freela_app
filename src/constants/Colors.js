@@ -4,6 +4,7 @@ export default {
     accentColor: '#fcbb5b',
     secondaryAccentColor: '#808080',
 
+    orange:'#FF9900',
     white: '#FFFFFF',
     darkGray: '#263238',
     lightGray: '#E0E0E0',

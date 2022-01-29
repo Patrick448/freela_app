@@ -16,7 +16,16 @@ const TabBar = ({ state, descriptors, navigation, centerButtonIcon}) =>{
 
   const onCenterButtonPress =()=>{
     const centerButtonItem = state.routes.find((item)=> item.name == "centerButtonRoute");
-    console.log("center button pressed")
+    console.log("center button pressed");
+
+    const event = navigation.emit({
+      type: 'tabPress',
+      target: centerButtonItem.key,
+    });
+
+    if (!event.defaultPrevented) {
+      navigation.navigate(centerButtonItem.name);
+    }
   }
 
   return (
@@ -70,7 +79,7 @@ const TabBar = ({ state, descriptors, navigation, centerButtonIcon}) =>{
                 {icon("")}
               </View>
              
-              <View style={{backgroundColor:isFocused?'white':'transparent' ,width:"50%", height: 3}}/>
+              <View style={{backgroundColor:isFocused?'white':'transparent',  borderRadius:10,width:"50%", height: 3}}/>
             </Pressable>
           
           </View> : null}

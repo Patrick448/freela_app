@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   bodyText:{
     marginTop:10,
     fontSize:14,
+    opacity:0.75
   },
   image:{
     flex: 1,

@@ -6,6 +6,7 @@ import ListItem from '../components/ListItem';
 import { TabBg } from '../components/TabBg';
 import TextSwitch from '../components/TextSwitch';
 import Colors from '../constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const data = [
@@ -56,12 +57,22 @@ const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-      <View style={{paddingBottom:10}}>
+      <View style={{paddingBottom:10, paddingHorizontal:15, flexDirection:'row'}}>
+
+      <View style={{flex:1, flexDirection:'row', justifyContent:'flex-end'}}/>
+
+      <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
          <TextSwitch 
         text0="Contrate" 
         text1="Ofereça" 
         onItem0Selected={()=>{console.log("0")}} 
         onItem1Selected={()=>{console.log("1")}}/>
+        </View>
+        
+      <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
+        <Ionicons name="search-sharp" size={26} color={Colors.secondaryColor}  />
+      </View>
+ 
       </View>
 
       
