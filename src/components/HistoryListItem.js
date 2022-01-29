@@ -2,27 +2,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { TouchableNativeFeedback } from 'react-native';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import Stars from './Stars';
 
  const HistoryListItem = props => {
 
    console.log(props);
 
-    const StarsRating = (props) =>{
-
-
-        const starColor= (isActive)=>{
-            return isActive? Colors.secondaryColor : Colors.lightGray;
-        }
-
-        return(<View style={{flexDirection:'row'}}>
-            <Ionicons name="star" size={18} color={starColor(props.rating>=5)} />
-            <Ionicons name="star" size={18} color={starColor(props.rating>=4)} />
-            <Ionicons name="star" size={18} color={starColor(props.rating>=3)} />
-            <Ionicons name="star" size={18} color={starColor(props.rating>=2)} />
-            <Ionicons name="star" size={18} color={starColor(props.rating>=1)} />
-
-        </View>)
-    }
 
    const getBubbleText = (status)=>{
 
@@ -79,7 +64,7 @@ import { Ionicons } from '@expo/vector-icons';
                
                {props.status==0?
                <View style={{flexDirection:'row', justifyContent:'center'}}>
-                    <StarsRating rating={props.rating}/>
+                    <Stars size={18} stars={props.rating} side="right"/>
                </View>:null
                 }
                 
