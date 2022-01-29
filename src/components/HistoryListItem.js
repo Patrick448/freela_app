@@ -60,7 +60,11 @@ import { Ionicons } from '@expo/vector-icons';
 
   return (
 
-    <TouchableNativeFeedback useForeground={true} onPress={ props.onPress ? () =>props.onPress(props.id) : ()=>{}}>
+    <TouchableNativeFeedback 
+    background={TouchableNativeFeedback.Ripple(Colors.secondaryColor)}
+
+    useForeground={true} 
+    onPress={ props.onPress ? () =>props.onPress(props.id) : ()=>{}}>
     <View style={styles.container}>
 
        <View style={styles.mainTextImageView} >
@@ -91,7 +95,7 @@ import { Ionicons } from '@expo/vector-icons';
         <View style={styles.image}>
            {props.status? 
            <View style={{position:'absolute', bottom: -10, right:0, backgroundColor:getBubbleColor(props.status),paddingVertical:5, paddingHorizontal: 10, borderRadius: 20}}>
-                <Text style={{color: Colors.white}}>{getBubbleText(props.status)}</Text>
+                <Text style={{color: Colors.white, fontFamily:'red-hat-medium'}}>{getBubbleText(props.status)}</Text>
             </View> : null}
             </View>        
         </View>
@@ -123,6 +127,7 @@ const styles = StyleSheet.create({
   },
   titleText:{
     fontSize:18,
+    fontFamily:'red-hat-medium'
 
     
   },
@@ -136,7 +141,7 @@ const styles = StyleSheet.create({
       paddingTop: 10, 
   },
   bodyText:{
-    
+    fontFamily:'red-hat-medium',
     fontSize:14,
     opacity:0.65
   },

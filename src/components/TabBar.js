@@ -10,22 +10,24 @@ import { TabBg } from './TabBg';
 const size = (Dimensions.get('window').width - 75.2)/2; 
 const {width} = Dimensions.get('window')
 
-const TabBar = ({ state, descriptors, navigation, centerButtonIcon}) =>{
+const TabBar = ({ state, descriptors, navigation, centerButtonIcon, centerButtonRoute}) =>{
 
-  console.log(state.routes);
+  console.log(descriptors);
 
   const onCenterButtonPress =()=>{
     const centerButtonItem = state.routes.find((item)=> item.name == "centerButtonRoute");
     console.log("center button pressed");
 
-    const event = navigation.emit({
+    
+   /* const event = navigation.emit({
       type: 'tabPress',
       target: centerButtonItem.key,
-    });
+    });*/
 
-    if (!event.defaultPrevented) {
-      navigation.navigate(centerButtonItem.name);
-    }
+
+   // if (!event.defaultPrevented) {
+      navigation.navigate(centerButtonRoute);
+   // }
   }
 
   return (
