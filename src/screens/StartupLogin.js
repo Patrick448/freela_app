@@ -16,7 +16,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import Colors from '../constants/Colors';
 
-const OptionsScreen = (props) => {
+const StartupLogin = (props) => {
 
 	return (
 		<View style={styles.container}>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default OptionsScreen;
+export default StartupLogin;

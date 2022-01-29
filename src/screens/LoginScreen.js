@@ -20,7 +20,7 @@ const LoginScreen = (props) => {
 	return (
 		<LinearGradient colors={['#9932CC', '#00A9A9']} style={styles.container}>
 			<View style={styles.logoContainer}>
-				<Image style={styles.logo} source={require('../../assets/imagens/logo.png')} />
+				<Image style={styles.logo} source={require('../../assets/imagens/logo2.png')} />
 			</View>		
             <View style={styles.formContainer}>
 				<View style={styles.bordaLogin}>

@@ -21,7 +21,7 @@ const DetalhesServicoScreen = (props) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.logoContainer}>
-				<Image style={styles.logo} source={require('../../assets/imagens/logo-aes-w.png')} />
+				
 			</View>		
 		</View>
 	);
