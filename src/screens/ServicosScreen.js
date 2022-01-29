@@ -74,10 +74,7 @@ const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
       </View>
  
       </View>
-
-      
      
-        
         <FlatList
         contentContainerStyle={{paddingBottom:70}}
         data={data}

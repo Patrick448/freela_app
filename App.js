@@ -9,6 +9,9 @@ import TabBar from './src/components/TabBar';
 import { Ionicons, Entypo, MaterialIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import CadastroServicoScreen from './src/screens/CadastroServicoScreen';
 import HistoricoServicosScreen from './src/screens/HistoricoServicosScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import CadastroScreen from './src/screens/CadastroScreen';
+import AvaliacaoScreen from './src/screens/AvaliacaoScreen';
 
 
 
@@ -56,7 +59,7 @@ export default function App() {
       <Tab.Screen options={chatTabOptions} name="Settings" component={ServicosScreen} />
       <Tab.Screen options={chatTabOptions} name="centerButtonRoute" component={CadastroServicoScreen} />
       <Tab.Screen options={servicesTabOptions} name="Historico" component={HistoricoServicosScreen} />
-      <Tab.Screen options={optionsTabOptions} name="Home3" component={ServicosScreen} />
+      <Tab.Screen options={optionsTabOptions} name="Home3" component={AvaliacaoScreen} />
     </Tab.Navigator>
 
    { /*<View style={styles.bottomTabBg}>
