@@ -8,7 +8,10 @@ import Colors from '../constants/Colors';
 
   return (
 
-    <TouchableNativeFeedback useForeground={true} onPress={ props.onPress ? () =>props.onPress(props.id) : ()=>{}}>
+    <TouchableNativeFeedback 
+    background={TouchableNativeFeedback.Ripple(Colors.secondaryColor)}
+    useForeground={true} 
+    onPress={ props.onPress ? () =>props.onPress(props.id) : ()=>{}}>
     <View style={styles.container}>
       <View><Text style={styles.timeInfoText}>{props.timeInfo}</Text></View>
 
@@ -36,7 +39,8 @@ const styles = StyleSheet.create({
     padding:15
   },
   timeInfoText:{
-    color: Colors.secondaryColor
+    color: Colors.secondaryColor,
+    fontFamily:'red-hat-medium',
   },
   mainTextImageView: {
     backgroundColor: Colors.white,
@@ -49,6 +53,7 @@ const styles = StyleSheet.create({
   },
   titleText:{
     fontSize:18,
+    fontFamily:'red-hat-medium',
   },
   textContainer:{
     flex: 2,
@@ -56,7 +61,9 @@ const styles = StyleSheet.create({
   bodyText:{
     marginTop:10,
     fontSize:14,
-    opacity:0.75
+    opacity:0.70,
+    fontFamily:'red-hat-medium',
+
   },
   image:{
     flex: 1,

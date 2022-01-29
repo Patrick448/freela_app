@@ -71,10 +71,11 @@ const styles = StyleSheet.create({
 
     text1:{
         paddingRight:5,
-
+        fontFamily:'red-hat-medium'
     },
     text2:{
         paddingLeft:5,
+        fontFamily:'red-hat-medium'
     },
   container: {
       padding: 5,

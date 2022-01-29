@@ -61,7 +61,7 @@ const HistoricoServicosScreen = props=> {
       <StatusBar style="auto" />
 
       <View style={{padding:15, flexDirection:'row', justifyContent: 'space-between'}}>
-        <Text style={{fontSize:20, fontWeight:'bold'}}>Histórico de serviços</Text>
+        <Text style={{fontSize:20, fontFamily:'red-hat-medium'}}>Histórico de serviços</Text>
         <Ionicons name="search-sharp" size={26} color={Colors.secondaryColor} />
         
       </View>
