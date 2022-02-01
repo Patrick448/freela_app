@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 
   name:{
-      padding:10,
+    padding:10,
     fontFamily:"red-hat-medium", 
     fontSize:20
   }
