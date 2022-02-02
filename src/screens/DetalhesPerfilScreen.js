@@ -12,11 +12,12 @@ const DetalhesPerfilScreen = props=> {
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-      <View style={{flexDirection:'column', alignItems:'center'}}>
+      <View style={{flexDirection:'column', alignItems:'center', paddingTop:15}}>
 
           <View style={{height:150, width: 150, backgroundColor:Colors.lightBlue, borderRadius: 75}}/>
             <Text style={styles.name}>Nome da Pessoa da Silva</Text>
             <Stars stars={4} size={24} side="left"/>
+
       </View>      
     </View>   
   );
