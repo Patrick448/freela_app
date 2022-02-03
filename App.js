@@ -66,6 +66,8 @@ const MainStackNavigator = () => {
         <Stack.Navigator >
             <Stack.Screen  name="HomeTabs" options={navigationOptions} component={HomeTabs}/>
             <Stack.Screen  name="Chat"  options={otherNavigationOptions} component={ChatScreen} />
+                        <Stack.Screen  name="Chat"  options={otherNavigationOptions} component={ChatScreen} />
+
         </Stack.Navigator>
     )
 }
