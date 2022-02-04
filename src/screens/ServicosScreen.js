@@ -7,7 +7,7 @@ import { TabBg } from '../components/TabBg';
 import TextSwitch from '../components/TextSwitch';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-
+import { useState } from 'react';
 
 const data = [
   {id: 1,
@@ -53,6 +53,12 @@ const ServicosScreen = props=> {
 
 const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
 
+const [switchState, setSwitchState] = useState(0);
+
+  const onSwitchHandler = (state)=>{
+      setSwitchState(state);
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -65,8 +71,8 @@ const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
          <TextSwitch 
         text0="Contrate" 
         text1="Ofereça" 
-        onItem0Selected={()=>{console.log("0")}} 
-        onItem1Selected={()=>{console.log("1")}}/>
+        state={switchState}
+        onSwitch={(state)=>onSwitchHandler(state)}/>
         </View>
         
       <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
