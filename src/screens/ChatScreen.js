@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: Colors.lightGray,
     fontFamily: 'red-hat-regular',
-    fontSize: 18,
+    fontSize: 15,
+
 
   },
   textBoxContainer:{
