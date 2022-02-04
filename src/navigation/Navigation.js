@@ -15,6 +15,7 @@ import CadastroScreen from '../screens/CadastroScreen';
 import StartupLogin from '../screens/StartupLogin';
 import DetalhesPerfilScreen from '../screens/DetalhesPerfilScreen';
 import CadastroServicoScreen from '../screens/CadastroServicoScreen';
+import PagamentoScreen from '../screens/PagamentoScreen';
 
 
 
@@ -66,6 +67,12 @@ const MainStackNavigator = () => {
        
    }
 
+   const pagamentoNavOptions = {
+    headerShown:true,
+    title:"Pagamento"
+     
+ }
+
 
      const otherNavigationOptions = {
       headerShown:true,
@@ -81,6 +88,7 @@ const MainStackNavigator = () => {
             <MainStack.Screen  name="DetalhesServico"  options={otherNavigationOptions} component={DetalhesServicoScreen}  />
             <MainStack.Screen  name="DetalhesPerfil"  options={perfilNavOptions} component={DetalhesPerfilScreen}  />
             <MainStack.Screen  name="CadastroServico"  options={novoServicoNavOptions} component={CadastroServicoScreen}  />
+            <MainStack.Screen  name="Pagamento"  options={pagamentoNavOptions} component={PagamentoScreen}  />
 
 
         </MainStack.Navigator>
@@ -117,7 +125,7 @@ function HomeTabs(){
     <Tab.Navigator 
     barStyle={{backgroundColor:'red'}} 
     tabBar={(props)=> 
-    <TabBar {...props} centerButtonRoute="CadastroServico" centerButtonIcon={()=> <Entypo name="plus" size={24} color="white" />}/>
+    <TabBar {...props} centerButtonRoute="Chat" centerButtonIcon={()=> <Entypo name="plus" size={24} color="white" />}/>
    }>
    <Tab.Screen options={homeTabOptions} name="Home" component={ServicosScreen} />
    <Tab.Screen options={chatTabOptions} name="ChatList" component={ChatListScreen} />

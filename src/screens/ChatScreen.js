@@ -1,14 +1,12 @@
-import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { StatusBar as RNStatusBar} from 'react-native';
-import { StyleSheet, Text, View } from 'react-native';
-import { FlatList, ScrollView, Dimensions } from 'react-native';
-import ListItem from '../components/ListItem';
-import { TabBg } from '../components/TabBg';
-import TextSwitch from '../components/TextSwitch';
+import { FlatList, ScrollView, Dimensions, StyleSheet, Text, View, TextInput } from 'react-native';
 import Colors from '../constants/Colors';
-import HistoryListItem from '../components/HistoryListItem'
 import ChatBubble from '../components/ChatBubble';
+import { useState } from 'react'
+import RoundButton from '../components/RoundButton';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+
 
 const data = [
     { sent: 1,
@@ -53,19 +51,27 @@ const data = [
      ]
 
 const ChatScreen = props=> {
+  const [inputText, setInputText] = useState("");
 
+  const sendButtonPressHandler = ()=>{
+    data.unshift({ sent: 0,
+      status:0,
+      text: inputText,
+      time:"08:54",
+      image:""})
+
+      setInputText("");
+  }
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-    
-      
-        <View>
+        <View style={{paddingBottom:0}}>
             <FlatList
             inverted={true}
             data={data}
-            contentContainerStyle={{paddingBottom:70}}
+            contentContainerStyle={{paddingBottom:100}}
             renderItem={({item})=> 
                     (<ChatBubble
                     onPress={()=>{}}
@@ -76,10 +82,23 @@ const ChatScreen = props=> {
             keyExtractor={(item) => item.id}/> 
         </View>
 
-        <View style={styles.textBoxPlaceHolder}>
+        <View style={styles.textBoxContainer}>
+        <TextInput
+        multiline={true}
+            onChangeText={(value) => setInputText(value)}
+            value={inputText}
+            style={styles.input}
+            placeholderTextColor='#AFAFAF'
+            placeholder='Mensagem'
+            autoCapitalize='none'
+            selectionColor={Colors.primaryColor}
+          />
 
-        </View>
-       
+          <RoundButton onPress={sendButtonPressHandler}>
+          <MaterialIcons name="send" size={26} color={Colors.white}/>
+          </RoundButton>
+
+        </View>       
     </View>
 
     
@@ -90,19 +109,33 @@ export default ChatScreen;
 
 const styles = StyleSheet.create({
   container: {
-
     flex:1,
     flexDirection:'column',
     backgroundColor: Colors.white,
     justifyContent:'flex-end',
 
- 
+  },
+  input: {
+    flex:1,
+    flexGrow:1,
+    minHeight: 55,
+    maxHeight:100,
+    marginRight:10,
+    paddingHorizontal:15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    backgroundColor: Colors.lightGray,
+    fontFamily: 'red-hat-regular',
+    fontSize: 18,
 
   },
-  textBoxPlaceHolder:{
-      width:"100%",
-      height:"10%",
-
+  textBoxContainer:{
+    paddingHorizontal:10,
+    paddingVertical:5,
+    alignItems:'center',
+    flexDirection:'row',
+    width:"100%",
+    marginVertical:5
   }
 
 });

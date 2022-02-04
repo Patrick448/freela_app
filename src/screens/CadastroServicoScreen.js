@@ -16,6 +16,7 @@ const CadastroServicoScreen = props=> {
 
   const [titleInputText, setTitleInputText] = useState("");
   const [descriptionInputText, setDescriptionInputText] = useState("");
+  const [priceInputText, setPriceInputText] = useState("");
   const [switchState, setSwitchState] = useState(0);
 
 
@@ -59,10 +60,9 @@ const CadastroServicoScreen = props=> {
         />
 
         <TextInput
-          textAlignVertical='top'
-          multiline={true}
-          onChangeText={(value)=>setDescriptionInputText(value)}
-          value={descriptionInputText}
+          keyboardType='numeric'         
+          onChangeText={(value)=>setPriceInputText(value)}
+          value={priceInputText}
           style={styles.valueInput}
           placeholderTextColor='#AFAFAF'
           placeholder='Valor'
@@ -72,15 +72,13 @@ const CadastroServicoScreen = props=> {
         />
 
         <View style={{width:"85%", alignItems:'flex-start', paddingTop: 25}}>
-          <FlatButton title='Horário' textStyle={{color:Colors.primaryColor, fontSize:18}}>
-              <Ionicons name="time-outline" size={24} color={Colors.primaryColor}/>          
-            </FlatButton>
 
             <FlatButton title='Local' style={{paddingTop:50}} textStyle={{color:Colors.primaryColor, fontSize:18}}>
               <Ionicons name="ios-location-outline" size={24} color={Colors.primaryColor}/>          
             </FlatButton>
           
         </View>
+        
       
 
       </View>
