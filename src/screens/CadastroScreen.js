@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 
 import Colors from '../constants/Colors';
+import FormTextInput from '../components/FormTextInput';
+import FormButton from '../components/FormButton';
 
 const CadastroScreen = (props) => {
 
@@ -123,6 +125,8 @@ const CadastroScreen = (props) => {
 					selectionColor={Colors.primaryColor}
 				/>
 			</View>
+
+			<FormButton></FormButton>
 		</View>
 	);
 };
@@ -130,7 +134,7 @@ const CadastroScreen = (props) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
+		justifyContent: 'flex-start',
 		alignItems: 'center',
 		backgroundColor: '#FFFFFF',
 	},

@@ -89,8 +89,6 @@ const MainStackNavigator = () => {
             <MainStack.Screen  name="DetalhesPerfil"  options={perfilNavOptions} component={DetalhesPerfilScreen}  />
             <MainStack.Screen  name="CadastroServico"  options={novoServicoNavOptions} component={CadastroServicoScreen}  />
             <MainStack.Screen  name="Pagamento"  options={pagamentoNavOptions} component={PagamentoScreen}  />
-
-
         </MainStack.Navigator>
     )
 }
@@ -130,7 +128,7 @@ function HomeTabs(){
    <Tab.Screen options={homeTabOptions} name="Home" component={ServicosScreen} />
    <Tab.Screen options={chatTabOptions} name="ChatList" component={ChatListScreen} />
    <Tab.Screen options={servicesTabOptions} name="Historico" component={HistoricoServicosScreen} />
-   <Tab.Screen options={optionsTabOptions} name="Options" component={OptionsScreen} />
+   <Tab.Screen options={optionsTabOptions} name="Options" component={CadastroScreen} />
  </Tab.Navigator>
   )
 }

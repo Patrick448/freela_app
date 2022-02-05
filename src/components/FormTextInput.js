@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View, Text } from 'react-native';
 
 import Colors from '../constants/Colors';
 
@@ -13,7 +13,7 @@ const FormTextInput = props => {
             />
             {props.error && props.touched &&
             <View style={styles.errorContainer}>
-                <DefaultText style={styles.errorText}>{props.error}</DefaultText>
+                <Text style={styles.errorText}>{props.error}</Text>
             </View>
             }
         </View>
@@ -23,7 +23,7 @@ const FormTextInput = props => {
 const styles = StyleSheet.create({
     inputContainer:
     {
-        width: '80%',
+        width: '90%',
         marginBottom: 25
     },
     title: 
@@ -31,14 +31,17 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginLeft: 4,
         marginBottom: 2,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: Colors.primaryColor
     },
     input:
     {
         height: 40,
-        backgroundColor: Colors.secondaryColor,
+        backgroundColor: "#FFFFFF",
         paddingHorizontal: 10,
         borderWidth: StyleSheet.hairlineWidth,
+        borderColor: Colors.primaryColor,
         borderRadius: 5,
         elevation: 2,
     },

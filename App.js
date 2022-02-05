@@ -10,6 +10,7 @@ import { Ionicons, Entypo, MaterialIcons, FontAwesome, MaterialCommunityIcons } 
 import CadastroServicoScreen from './src/screens/CadastroServicoScreen';
 import HistoricoServicosScreen from './src/screens/HistoricoServicosScreen';
 import ChatScreen from './src/screens/ChatScreen';
+import ChatListScreen from './src/screens/ChatListScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
 import { useState } from 'react';
@@ -86,9 +87,9 @@ function HomeTabs(){
     <TabBar {...props} centerButtonRoute="Chat" centerButtonIcon={()=> <Entypo name="plus" size={24} color="white" />}/>
    }>
    <Tab.Screen options={homeTabOptions} name="Home" component={ServicosScreen} />
-   <Tab.Screen options={chatTabOptions} name="Chats" component={ServicosScreen} />
+   <Tab.Screen options={chatTabOptions} name="Chats" component={ChatListScreen} />
    <Tab.Screen options={servicesTabOptions} name="Historico" component={HistoricoServicosScreen} />
-   <Tab.Screen options={optionsTabOptions} name="Home3" component={ServicosScreen} />
+   <Tab.Screen options={optionsTabOptions} name="Home3" component={CadastroScreen} />
  </Tab.Navigator>
   )
 }
