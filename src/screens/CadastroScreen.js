@@ -17,6 +17,8 @@ import {
 import Colors from '../constants/Colors';
 import FormTextInput from '../components/FormTextInput';
 import FormButton from '../components/FormButton';
+import FormPicker from '../components/FormPicker';
+import FormDate from '../components/FormDate';
 
 const CadastroScreen = (props) => {
 
@@ -26,12 +28,12 @@ const CadastroScreen = (props) => {
 						<Text style={styles.title}>Dados Pessoais</Text>
 			</View>
 
-			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
+			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor, textAlign: "left" }}>
 				Nome
 			</Text>
 			<TextInput
 				placeholderTextColor='#AFAFAF'
-				placeholder='Digite seu e-mail'
+				placeholder='Digite seu nome'
 				style={{ ...styles.input, marginBottom: 12 }}
 				onSubmitEditing={() => {}}
 				keyboardType='email-address'
@@ -45,27 +47,19 @@ const CadastroScreen = (props) => {
 				Gênero
 			</Text>
 
+			<FormPicker></FormPicker>
+
 			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
 				Data de Nascimento
 			</Text>
-			<TextInput
-				placeholderTextColor='#AFAFAF'
-				placeholder='Digite seu e-mail'
-				style={{ ...styles.input, marginBottom: 12 }}
-				onSubmitEditing={() => {}}
-				keyboardType='email-address'
-				autoCapitalize='none'
-				autoCorrect={false}
-				returnKeyType='next'
-				selectionColor={Colors.primaryColor}
-			/>
+			<FormDate></FormDate>
 
 			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
 				Telefone
 			</Text>
 			<TextInput
 				placeholderTextColor='#AFAFAF'
-				placeholder='Digite seu e-mail'
+				placeholder='Digite seu telefone'
 				style={{ ...styles.input, marginBottom: 12 }}
 				onSubmitEditing={() => {}}
 				keyboardType='email-address'
@@ -117,7 +111,7 @@ const CadastroScreen = (props) => {
 			<View style={styles.inputContainerPassword}>
 				<TextInput
 					placeholderTextColor='#AFAFAF'
-					placeholder='Digite sua senha'
+					placeholder='Repita sua senha'
 					style={styles.inputPassword}
 					secureTextEntry
 					autoCapitalize='none'
@@ -126,7 +120,7 @@ const CadastroScreen = (props) => {
 				/>
 			</View>
 
-			<FormButton></FormButton>
+			<FormButton title="Criar conta" colorBack={Colors.primaryColor} width="60%"></FormButton>
 		</View>
 	);
 };
@@ -134,7 +128,7 @@ const CadastroScreen = (props) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'flex-start',
+		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#FFFFFF',
 	},
@@ -229,6 +223,7 @@ const styles = StyleSheet.create({
 	},
     textBox: {
         alignItems: 'center',
+		justifyContent: 'center'
     },
     cadastrarBox: {
         marginTop: 10,

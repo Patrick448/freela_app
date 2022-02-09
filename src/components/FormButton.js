@@ -1,18 +1,17 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, StyleSheet, ActivityIndicator, Text } from 'react-native';
 
-import DefaultText from '../DefaultText';
-import Colors from '../../constants/Colors'
+import Colors from '../constants/Colors';
 
 const FormButton = props => {
 
     return (
 
-        <TouchableOpacity activeOpacity={0.4} onPress={props.onPress} style={{...styles.buttonContainer, backgroundColor: props.backColor, borderColor: props.borderColor}}>
+        <TouchableOpacity activeOpacity={0.4} onPress={props.onPress} style={{...styles.buttonContainer, backgroundColor: props.colorBack, width: props.width}}>
             {props.loading ? 
                 <ActivityIndicator size='large' color={Colors.primaryColor} />
                 :
-                <DefaultText style={{...styles.buttonText, color: props.textColor}}>{props.title}</DefaultText>
+                <Text style={{...styles.buttonText}}>{props.title}</Text>
             }
         </TouchableOpacity>
     )
@@ -21,14 +20,14 @@ const FormButton = props => {
 const styles = StyleSheet.create({
     buttonContainer:
     {
+        marginTop: 15,
         marginBottom: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        width: '80%',
-        height: 48,
-        backgroundColor: Colors.primaryColor,
-        borderWidth: 2,
-        borderRadius: 25,
+        width: '30%',
+        height: 60,
+        backgroundColor: Colors.secondaryColor,
+        borderRadius: 8,
     },
     buttonText:
     {

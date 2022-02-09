@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker'
 import moment from 'moment'
 
-import DefaultText from '../DefaultText';
-import Colors from '../../constants/Colors'
+import Colors from '../constants/Colors'
 
 const FormTextInput = props => {
 
@@ -16,7 +15,6 @@ const FormTextInput = props => {
 
     return (
         <View style={styles.container}>
-            <DefaultText style={styles.title}>{props.title}</DefaultText>
             <TouchableOpacity
                 {...props}
                 activeOpacity={0.4}
@@ -25,7 +23,7 @@ const FormTextInput = props => {
                 }}
                 style={props.error && props.touched ? styles.error : styles.dateInput}
             >
-                <DefaultText>{props.value === '' ? "--/--/----" : props.value}</DefaultText>
+                <Text>{props.value == '' ? "--/--/----" : props.value}</Text>
             </TouchableOpacity>
             {showDatePicker &&
                 <DateTimePicker
@@ -46,7 +44,7 @@ const FormTextInput = props => {
             }
             {props.error && props.touched &&
             <View style={styles.errorContainer}>
-                <DefaultText style={styles.errorText}>{props.error}</DefaultText>
+                <Text style={styles.errorText}>{props.error}</Text>
             </View>
             }
         </View>
@@ -64,14 +62,14 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginLeft: 4,
         marginBottom: 2,
-        color: Colors.secondaryColor,
+        color: Colors.primaryColor,
         fontWeight: 'bold'
     },
     dateInput:
     {
         justifyContent: 'center',
         height: 40,
-        backgroundColor: Colors.secondaryColor,
+        backgroundColor: "#FFFFFF",
         paddingHorizontal: 10,
         borderWidth: StyleSheet.hairlineWidth,
         borderRadius: 5,

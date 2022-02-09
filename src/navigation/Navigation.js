@@ -128,7 +128,7 @@ function HomeTabs(){
    <Tab.Screen options={homeTabOptions} name="Home" component={ServicosScreen} />
    <Tab.Screen options={chatTabOptions} name="ChatList" component={ChatListScreen} />
    <Tab.Screen options={servicesTabOptions} name="Historico" component={HistoricoServicosScreen} />
-   <Tab.Screen options={optionsTabOptions} name="Options" component={CadastroScreen} />
+   <Tab.Screen options={optionsTabOptions} name="Options" component={DetalhesServicoScreen} />
  </Tab.Navigator>
   )
 }

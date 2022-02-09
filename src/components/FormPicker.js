@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import Colors from '../../constants/Colors';
-import Traducao from '../Traducao/Traducao';
+import Colors from '../constants/Colors';
 
 const gender = {
     masc: {
@@ -47,9 +46,9 @@ const FormPicker = props => {
                     activeOpacity={0.4}
                     onPress={() => setIsOpen(!isOpen)}
                 >
-                    <Text>{props.value === null ? "Escolha" : `${chosenGender}`}</Text>
+                    <Text>{props.value == null ? "Escolha" : `${chosenGender}`}</Text>
                     <Ionicons 
-                        name={isOpen ? 'md-arrow-dropup' : 'md-arrow-dropdown'}
+                        name={isOpen ? 'ios-arrow-up' :'ios-arrow-down'}
                         size={24}
                         color={Colors.primaryColor}
                     />
@@ -95,7 +94,7 @@ const FormPicker = props => {
 const styles = StyleSheet.create({
     pickerContainer:
     {
-        width: '80%',
+        width: '90%',
         marginBottom: 20,
     },
     title: 
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     {
         justifyContent: 'center',
         minHeight: 40,
-        backgroundColor: Colors.secondaryColor,
+        backgroundColor: "#FFFFFF",
         paddingHorizontal: 10,
         borderWidth: StyleSheet.hairlineWidth,
         borderRadius: 5,
