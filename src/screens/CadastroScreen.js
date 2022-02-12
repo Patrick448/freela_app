@@ -11,8 +11,13 @@ import {
 	Dimensions,
 	ActivityIndicator,
 	Platform,
-	Text
+	Text,
+	TouchableWithoutFeedback,
+	ScrollView, Keyboard
 } from 'react-native';
+import { StatusBar as RNStatusBar} from 'react-native';
+import moment from 'moment'
+import { Formik } from 'formik'
 
 import Colors from '../constants/Colors';
 import FormTextInput from '../components/FormTextInput';
@@ -20,12 +25,60 @@ import FormButton from '../components/FormButton';
 import FormPicker from '../components/FormPicker';
 import FormDate from '../components/FormDate';
 
+import * as userActions from '../store/actions/userActions';
+import { useDispatch } from "react-redux";
+
+
 const CadastroScreen = (props) => {
 
+	const [loading, setLoading] = useState(false);
+	const [date, setDate] = useState('');
+
+	const dispatch = useDispatch();
+
+	const initialValues = {
+		nome: '',
+		email: '',
+		senha: '',
+		telefone: '',
+		dataNascimento: '',
+		genero: null,
+		dataCadastro: ''
+	}
+
+	const onSubmit = async (values, actions) => {
+		console.log('values: ')
+		console.log(values);
+		const registerValues = new Usuario(values.nome, values.email, values.senha, values.telefone, values.dataNascimento, values.genero, moment())
+
+		setLoading(true);
+		try {
+			await dispatch(userActions.signup(registerValues));
+			setLoading(false);
+			props.navigation.navigate('Login');
+			Alert.alert("Cadastro feito com sucesso!");
+		} catch (error) {
+			setLoading(false);
+			Alert.alert("Falha no cadastro.");
+			// console.error(error)
+		}
+	}
+
 	return (
-		<View style={styles.container}>
+		<ScrollView contentContainerStyle={styles.container}>
+
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+				<Formik
+					initialValues={initialValues}
+					onSubmit={onSubmit}
+				>
+					{(formikProps) => (
+
+					)}
+				</Formik>
+			</TouchableWithoutFeedback>
 			<View style={styles.textBox}>
-						<Text style={styles.title}>Dados Pessoais</Text>
+				<Text style={styles.title}>Dados Pessoais</Text>
 			</View>
 
 			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor, textAlign: "left" }}>
@@ -43,11 +96,13 @@ const CadastroScreen = (props) => {
 				selectionColor={Colors.primaryColor}
 			/>
 
-			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
-				Gênero
-			</Text>
+			<View style={styles.textBox}>
+				<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
+					Gênero
+				</Text>
+			</View>
 
-			<FormPicker></FormPicker>
+			<FormPicker style={{width:"100%"}}></FormPicker>
 
 			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
 				Data de Nascimento
@@ -91,7 +146,7 @@ const CadastroScreen = (props) => {
 			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
 				Senha
 			</Text>
-			
+
 			<View style={styles.inputContainerPassword}>
 				<TextInput
 					placeholderTextColor='#AFAFAF'
@@ -107,7 +162,7 @@ const CadastroScreen = (props) => {
 			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
 				Repetir Senha
 			</Text>
-			
+
 			<View style={styles.inputContainerPassword}>
 				<TextInput
 					placeholderTextColor='#AFAFAF'
@@ -119,9 +174,10 @@ const CadastroScreen = (props) => {
 					selectionColor={Colors.primaryColor}
 				/>
 			</View>
-
-			<FormButton title="Criar conta" colorBack={Colors.primaryColor} width="60%"></FormButton>
-		</View>
+			<View style={{width:"100%", alignItems:'center'}}>
+				<FormButton title="Criar conta" colorBack={Colors.primaryColor} width="60%"></FormButton>
+			</View>
+		</ScrollView>
 	);
 };
 
@@ -129,8 +185,10 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center',
+		alignItems: 'flex-start',
 		backgroundColor: '#FFFFFF',
+		padding:15,
+		paddingTop: RNStatusBar.currentHeight
 	},
 	bordaLogin: {
 		marginHorizontal: 10,
@@ -152,7 +210,7 @@ const styles = StyleSheet.create({
         borderColor: Colors.primaryColor,
 		borderRadius: 5,
 		elevation: 1,
-		width: '90%'
+		width: '100%'
 	},
 	inputContainerPassword: {
 		flexDirection: 'row',
@@ -166,7 +224,7 @@ const styles = StyleSheet.create({
 		elevation: 1,
 	},
 	inputPassword: {
-		width: '90%',
+		width: '100%',
 	},
 	buttonView: {
 		justifyContent: 'center',
@@ -222,6 +280,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
 	},
     textBox: {
+		width:"100%",
         alignItems: 'center',
 		justifyContent: 'center'
     },

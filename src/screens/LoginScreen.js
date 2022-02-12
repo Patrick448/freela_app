@@ -7,12 +7,15 @@ import {
     Text,
     TextInput,
     KeyboardAvoidingView,
-    TouchableOpacity
+    TouchableOpacity,
+	ActivityIndicator,
+	Alert
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import * as userActions from "../store/actions/userActions";
 import FormTextInput from '../components/FormTextInput';
+import { useSelector, useDispatch } from 'react-redux'
 
 import Colors from '../constants/Colors';
 
@@ -23,7 +26,7 @@ const LoginScreen = (props) => {
 	const [emailInputText, setEmailInputText] = useState("");
 
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState();
+	const [error, setError] = useState(null);
 
 	const onEmailChange = (emailInput) => {
 		setEmailInputText(emailInput);
@@ -37,6 +40,7 @@ const LoginScreen = (props) => {
 		setError(null);
 
 		try {
+			console.log("trying to sign in")
 			setLoading(true);
 			await dispatch(userActions.signin(emailInputText, passwordInputText));
 			/*
@@ -54,7 +58,7 @@ const LoginScreen = (props) => {
 			setLoading(false);
 			setError(err.message);
 		}
-	}, [dispatch, email, password]);
+	}, [dispatch, emailInputText, passwordInputText]);
 
 	useEffect(() => {
 		if (error) {
@@ -120,12 +124,12 @@ const LoginScreen = (props) => {
 					</KeyboardAvoidingView>
 
                     <View style={styles.buttonView}>
-                        <TouchableOpacity onPress={signinHandler()} style={styles.buttonContainer}>
+                        <TouchableOpacity onPress={signinHandler} style={styles.buttonContainer}>
                             <Text style={styles.buttonText}>Entrar</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            onPress={() => {}}
+                            onPress={() => {props.navigation.navigate("Cadastro")}}
                             style={styles.cadastrarBox}
                         >
                             <Text style={styles.buttonTextSignIn}>Cadastrar</Text>

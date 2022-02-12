@@ -4,21 +4,21 @@ export const SIGNIN = 'SIGNIN';
 export const LOGOUT = 'LOGOUT';
 export const AUTHENTICATE = 'AUTHENTICATE';
 
-import Localhost from '../constants/Localhost';
+import Localhost from '../../constants/Localhost';
 
 const encryptPassword = (senha) => {
-    var CryptoJS = require('crypto-js');
-    var pwhash = CryptoJS.enc.Utf8.parse('ekhilAitcapWarHy');
-    var key = CryptoJS.enc.Hex.parse(pwhash.toString(CryptoJS.enc.Hex).substr(0, 32));
+   // var CryptoJS = require('crypto-js');
+    //var pwhash = CryptoJS.enc.Utf8.parse('ekhilAitcapWarHy');
+   // var key = CryptoJS.enc.Hex.parse(pwhash.toString(CryptoJS.enc.Hex).substr(0, 32));
 
-    var encrypted = CryptoJS.AES.encrypt(senha, key, {
-        mode: CryptoJS.mode.ECB,
-        padding: CryptoJS.pad.Pkcs7,
-    });
+   // var encrypted = CryptoJS.AES.encrypt(senha, key, {
+    //    mode: CryptoJS.mode.ECB,
+    //    padding: CryptoJS.pad.Pkcs7,
+    //});
 
-    var ciphertext = encrypted.ciphertext.toString(CryptoJS.enc.Hex);
+   // var ciphertext = encrypted.ciphertext.toString(CryptoJS.enc.Hex);
 
-    return ciphertext;
+   // return ciphertext;
 };
 
 export const authenticate = (token, id, nome, email, dataNascimento, genero, telefone, estrelas, admin) => {
@@ -36,6 +36,8 @@ export const authenticate = (token, id, nome, email, dataNascimento, genero, tel
 };
 
 export const signin = (email, senha) => {
+
+
     return async (dispatch) => {
         //const encryptedPass = encryptPassword(password);
         const response = await fetch(
@@ -45,21 +47,25 @@ export const signin = (email, senha) => {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    body:{
-                        email: email,
-                        senha:senha
-                    }
                 },
+                body: JSON.stringify({
+                    email: email,
+                    senha: senha
+                }),
             }
         );
 
+
+
         if (!response.ok) {
-            throw new Error("Senha errada.");
+            throw new Error("Informações de login erradas.");
         }
+
         const token = await response.text();
+        //console.log(token);
 
         const responseUser = await fetch(
-            `http://${Localhost.address}:${Localhost.port}/get-user`,
+            `http://${Localhost.address}:${Localhost.port}/users/get-user`,
             {
                 method: 'GET',
                 headers: {
@@ -70,12 +76,14 @@ export const signin = (email, senha) => {
             }
         );
 
+        //console.log(JSON.stringify(responseUser));
+
         if (!responseUser.ok) {
             throw new Error("Erro no login");
         }
 
         const usr = await responseUser.json();
-        console.log(usr);
+        //console.log(usr);
 
         /**
          * General checks to simplify future service calls

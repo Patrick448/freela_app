@@ -38,7 +38,7 @@ const FormPicker = props => {
     const [chosenGender, setChosenGender] = useState();
 
     return (
-        <View style={styles.pickerContainer}>
+        <View style={{...styles.pickerContainer, ...props.style}}>
             <Text style={styles.title}>{props.title}</Text>
             <View style={props.error && props.touched ? styles.error : styles.picker}>
                 <TouchableOpacity 
@@ -94,7 +94,7 @@ const FormPicker = props => {
 const styles = StyleSheet.create({
     pickerContainer:
     {
-        width: '90%',
+        width: '100%',
         marginBottom: 20,
     },
     title: 
@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderWidth: StyleSheet.hairlineWidth,
         borderRadius: 5,
-        elevation: 2,
     },
     pickerContent:
     {

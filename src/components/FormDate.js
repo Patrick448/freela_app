@@ -14,7 +14,7 @@ const FormTextInput = props => {
     const [valueDate, setValueDate] = useState(new Date(maxDate))
 
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, ...props.style}}>
             <TouchableOpacity
                 {...props}
                 activeOpacity={0.4}
@@ -54,7 +54,7 @@ const FormTextInput = props => {
 const styles = StyleSheet.create({
     container:
     {
-        width: '80%',
+        width: '100%',
         marginBottom: 25
     },
     title: 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderWidth: StyleSheet.hairlineWidth,
         borderRadius: 5,
-        elevation: 2,
+
     },
     error:
     {

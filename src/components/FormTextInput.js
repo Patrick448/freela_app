@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
         borderWidth: StyleSheet.hairlineWidth,
         borderColor: Colors.primaryColor,
         borderRadius: 5,
-        elevation: 2,
     },
     error:
     {

@@ -1,4 +1,4 @@
 export default {
-    address: 'localhost',
+    address: '192.168.0.124',
     port: '8080'
 };

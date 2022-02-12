@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 token: action.token,
-                currentUser: new User(
+                currentUser: new Usuario(
                     action.id,
                     action.name,
                     action.email,
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 token: action.token,
-                currentUser: new User(
+                currentUser: new Usuario(
                     action.id,
                     action.name,
                     action.email,
