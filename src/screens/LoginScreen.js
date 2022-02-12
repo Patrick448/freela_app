@@ -11,14 +11,64 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import * as userActions from "../store/actions/userActions";
 import FormTextInput from '../components/FormTextInput';
 
 import Colors from '../constants/Colors';
 
 const LoginScreen = (props) => {
+	const dispatch = useDispatch();
+
 	const [passwordInputText, setPasswordInputText] = useState("");
 	const [emailInputText, setEmailInputText] = useState("");
 
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState();
+
+	const onEmailChange = (emailInput) => {
+		setEmailInputText(emailInput);
+	};
+
+	const onPasswordChange = (passwordInput) => {
+		setPasswordInputText(passwordInput);
+	};
+
+	const signinHandler = useCallback(async () => {
+		setError(null);
+
+		try {
+			setLoading(true);
+			await dispatch(userActions.signin(emailInputText, passwordInputText));
+			/*
+			await dispatch(recordActions.fetchRecord());
+			await dispatch(recordActions.fetchDailyLogs());
+			await dispatch(challengeActions.fetchChallenges());
+			await dispatch(challengeActions.fetchUserChallenges());
+			await dispatch(tipActions.fetchTips());
+			await dispatch(tipActions.fetchUserTips());
+			await dispatch(optionsActions.fetchOptions());
+			await dispatch(messageActions.fetchChat());
+			*/
+			//props.navigation.navigate('StartupLogin');
+		} catch (err) {
+			setLoading(false);
+			setError(err.message);
+		}
+	}, [dispatch, email, password]);
+
+	useEffect(() => {
+		if (error) {
+			Alert.alert('Um erro ocorreu!', error, [{ text: 'Ok' }]);
+		}
+	}, [error]);
+
+	if (loading) {
+		return (
+			<View style={styles.loading}>
+				<ActivityIndicator size='large' color={Colors.secondaryColor} />
+			</View>
+		);
+	}
 
 	return (
 		<LinearGradient colors={['#9932CC', '#00A9A9']} style={styles.container}>
@@ -38,7 +88,7 @@ const LoginScreen = (props) => {
 						</Text>
 						<TextInput
 							value={emailInputText}
-							
+							onChangeText={onEmailChange}
 							placeholderTextColor='#AFAFAF'
 							placeholder='Digite seu e-mail'
 							style={{ ...styles.input, marginBottom: 12 }}
@@ -57,6 +107,7 @@ const LoginScreen = (props) => {
                         <View style={styles.inputContainerPassword}>
                             <TextInput
 								value={passwordInputText}
+								onChangeText={onPasswordChange}
                                 placeholderTextColor='#AFAFAF'
                                 placeholder='Digite sua senha'
                                 style={styles.inputPassword}
@@ -69,7 +120,7 @@ const LoginScreen = (props) => {
 					</KeyboardAvoidingView>
 
                     <View style={styles.buttonView}>
-                        <TouchableOpacity onPress={() => {}} style={styles.buttonContainer}>
+                        <TouchableOpacity onPress={signinHandler()} style={styles.buttonContainer}>
                             <Text style={styles.buttonText}>Entrar</Text>
                         </TouchableOpacity>
 
