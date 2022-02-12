@@ -16,6 +16,7 @@ import StartupLogin from '../screens/StartupLogin';
 import DetalhesPerfilScreen from '../screens/DetalhesPerfilScreen';
 import CadastroServicoScreen from '../screens/CadastroServicoScreen';
 import PagamentoScreen from '../screens/PagamentoScreen';
+import { useSelector, useDispatch } from 'react-redux'
 
 
 
@@ -128,7 +129,7 @@ function HomeTabs(){
    <Tab.Screen options={homeTabOptions} name="Home" component={ServicosScreen} />
    <Tab.Screen options={chatTabOptions} name="ChatList" component={ChatListScreen} />
    <Tab.Screen options={servicesTabOptions} name="Historico" component={HistoricoServicosScreen} />
-   <Tab.Screen options={optionsTabOptions} name="Options" component={DetalhesServicoScreen} />
+   <Tab.Screen options={optionsTabOptions} name="Options" component={OptionsScreen} />
  </Tab.Navigator>
   )
 }
@@ -136,7 +137,7 @@ function HomeTabs(){
 
 export default function AppNavigator() {
 
-   const loggedIn =1; 
+   const loggedIn = useSelector(state=> state.user.currentUser);
   
     return (
   

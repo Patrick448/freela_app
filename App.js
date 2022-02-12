@@ -1,13 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import ListItem from './src/components/ListItem';
 import ServicosScreen from './src/screens/ServicosScreen';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TabBg } from './src/components/TabBg';
 import TabBar from './src/components/TabBar';
 import { Ionicons, Entypo, MaterialIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import CadastroServicoScreen from './src/screens/CadastroServicoScreen';
 import HistoricoServicosScreen from './src/screens/HistoricoServicosScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import ChatListScreen from './src/screens/ChatListScreen';
@@ -16,6 +11,28 @@ import AppLoading from 'expo-app-loading';
 import { useState } from 'react';
 import * as Font from 'expo-font';
 import AppNavigator from './src/navigation/Navigation';
+
+//Redux
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import ReduxThunk from "redux-thunk";
+
+//Reducers
+import userReducer from "./src/store/reducers/userReducer"
+
+
+const appReducer = combineReducers({
+    user: userReducer,
+});
+
+const rootReducer = (state, action) => {
+    return appReducer(state, action);
+};
+
+const store = createStore(
+    rootReducer,
+    compose(applyMiddleware(ReduxThunk))
+);
 
 const homeTabOptions = {headerShown: false,
   tabBarIcon: ({tintColor})=>(  
@@ -117,10 +134,9 @@ export default function App() {
               onError={(error)=>console.log(error)}/>;}
 
   return (
-
-    <AppNavigator/>
-    
-
+      <Provider store={store}>
+          <AppNavigator/>
+      </Provider>
   );
 }
 

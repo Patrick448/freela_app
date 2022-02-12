@@ -18,10 +18,28 @@ import Colors from '../constants/Colors';
 
 const StartupLogin = (props) => {
 
+	const dispatch = useDispatch();
+
+	const [isLogging, setIsLogging] = useState(false);
+
+	useEffect(() => {
+		const tryLogin = async () => {
+			/*await dispatch(recordActions.fetchRecord());*/
+
+			setIsLogging(true);
+		};
+		tryLogin();
+	}, [dispatch]);
+
+	useEffect(() => {
+		if(isLogging){
+			props.navigation.navigate("Navegacao");
+		}
+	}, [dispatch, isLogging]);
+
 	return (
-		<View style={styles.container}>
-			<View style={styles.logoContainer}>
-			</View>		
+		<View style={styles.loading}>
+			<ActivityIndicator size='large' color={Colors.secondaryColor} />
 		</View>
 	);
 };

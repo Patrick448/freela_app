@@ -16,6 +16,9 @@ import FormTextInput from '../components/FormTextInput';
 import Colors from '../constants/Colors';
 
 const LoginScreen = (props) => {
+	const [passwordInputText, setPasswordInputText] = useState("");
+	const [emailInputText, setEmailInputText] = useState("");
+
 
 	return (
 		<LinearGradient colors={['#9932CC', '#00A9A9']} style={styles.container}>
@@ -34,6 +37,8 @@ const LoginScreen = (props) => {
 							E-mail
 						</Text>
 						<TextInput
+							value={emailInputText}
+							
 							placeholderTextColor='#AFAFAF'
 							placeholder='Digite seu e-mail'
 							style={{ ...styles.input, marginBottom: 12 }}
@@ -51,6 +56,7 @@ const LoginScreen = (props) => {
 						
                         <View style={styles.inputContainerPassword}>
                             <TextInput
+								value={passwordInputText}
                                 placeholderTextColor='#AFAFAF'
                                 placeholder='Digite sua senha'
                                 style={styles.inputPassword}
