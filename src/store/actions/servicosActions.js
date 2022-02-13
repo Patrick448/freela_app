@@ -6,13 +6,13 @@ export const AUTHENTICATE = 'AUTHENTICATE';
 
 import Localhost from '../../constants/Localhost';
 
-export const fetchServicos = (num) => {
+export const fetchServicos = (num, buscaContratante) => {
     console.log(FETCH_SERVICOS);
     return async (dispatch, getState) => {
         const token = getState().user.token;
 
         const response = await fetch(
-            `http://${Localhost.address}:${Localhost.port}/services?page=0&size=${num}&sort=data,desc`,
+            `http://${Localhost.address}:${Localhost.port}/services?page=0&size=${num}&sort=data,desc&buscaContrante=${buscaContratante}`,
             {
                 method: 'GET',
                 headers: {
@@ -32,7 +32,9 @@ export const fetchServicos = (num) => {
         const pagedResponse = await response.json();
         const listaServicos = pagedResponse.content;
 
-        dispatch({type: FETCH_SERVICOS, listaServicos:listaServicos})
+
+        dispatch({type: FETCH_SERVICOS, buscaContratante: buscaContratante, listaServicos:listaServicos})
+
 
         console.log(listaServicos)
     };

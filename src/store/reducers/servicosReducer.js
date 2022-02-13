@@ -5,17 +5,27 @@ import {
 import Servico from '../../model/Servico'
 
 const initialState = {
-    servicosFeed: null
+    servicosProcuradosFeed: null,
+    servicosOferecidosFeed: null
 }
 
 export default (state = initialState, action) =>{
 
     switch (action.type){
         case FETCH_SERVICOS:
-            return{
-                ...state,
-                servicosFeed: action.listaServicos
-            };
+            if(action.buscaContratante){
+                return{
+                    ...state,
+                    servicosOferecidosFeed: action.listaServicos,
+
+                };
+            }else{
+                return{
+                    ...state,
+                    servicosProcuradosFeed: action.listaServicos,
+                };
+            }
+
         default:
             return state;
     }

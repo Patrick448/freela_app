@@ -55,7 +55,8 @@ const data = [
 const ServicosScreen = props=> {
 
   const dispatch = useDispatch();
-  const servicosFeed = useSelector(state=> state.servicos.servicosFeed);
+  const servicosProcuradosFeed = useSelector(state=> state.servicos.servicosProcuradosFeed);
+  const servicosOferecidosFeed = useSelector(state=> state.servicos.servicosOferecidosFeed);
   const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
   const [switchState, setSwitchState] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -71,12 +72,14 @@ const ServicosScreen = props=> {
     try {
       setLoading(true);
       console.log("trying to fetch servicos")
-      await dispatch(servicosActions.fetchServicos(20));
+      await dispatch(servicosActions.fetchServicos(20, true));
+      await dispatch(servicosActions.fetchServicos(20, false));
     } catch (err) {
       setLoading(false);
       setError(err.message);
     }finally {
-      console.log(servicosFeed);
+      console.log(servicosProcuradosFeed);
+      console.log(servicosOferecidosFeed);
     }
   }
 
@@ -116,7 +119,7 @@ const ServicosScreen = props=> {
      
         <FlatList
         contentContainerStyle={{paddingBottom:70}}
-        data={servicosFeed}
+        data={switchState? servicosProcuradosFeed: servicosOferecidosFeed}
         renderItem={({item})=> 
                   (<ListItem 
                   onPress={onItemPress}
