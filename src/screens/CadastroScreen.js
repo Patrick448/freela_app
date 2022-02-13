@@ -166,7 +166,6 @@ const CadastroScreen = (props) => {
 									onChangeText={formikProps.handleChange('email')}
 									onBlur={formikProps.handleBlur('email')}
 									value={formikProps.values.email}
-									error={formikProps.errors.email}
 									autoCapitalize='none'
 									autoCorrect={false}
 									returnKeyType='next'
@@ -204,6 +203,12 @@ const CadastroScreen = (props) => {
 										placeholderTextColor='#AFAFAF'
 										placeholder='Repita sua senha'
 										style={styles.inputPassword}
+										onChangeText={formikProps.handleChange('senha')}
+										onBlur={formikProps.handleBlur('senha')}
+										value={formikProps.values.senha}
+										touched={formikProps.touched.senha}
+										autoCapitalize='none'
+										autoCorrect={false}
 										secureTextEntry
 										autoCapitalize='none'
 										returnKeyType='go'
