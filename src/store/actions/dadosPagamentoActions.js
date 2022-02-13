@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const FETCH_AVALIACOES = 'FETCH_AVALIACOES';
+export const FETCH_DADOS_PAGAMENTO = 'FETCH_DADOS_PAGAMENTO';
 
 import Localhost from '../../constants/Localhost';
-import Avaliacao from "../../model/Avaliacao";
+import DadosPagamento from "../../model/DadosPagamento";
 
-export const fetchAvaliacoes = () => {
+export const fetchDadosPagamento = () => {
     try {
         return async (dispatch, getState) => {
             const token = getState().user.token;
@@ -19,19 +19,17 @@ export const fetchAvaliacoes = () => {
             });
 
             if (!response.ok) {
-                throw new Error("Erro na busca de avaliacoes");
+                throw new Error("Erro na busca de dados de pagamento");
             }
 
             const resData = await response.json();
 
-            const loadedEvaluations = [];
-            for (const key in resData) {
-                loadedEvaluations.push(new Avaliacao(resData[key].id, resData[key].estrelas,
-                    resData[key].texto, resData[key].data,
-                    resData[key].servico))
-            }
+            let loadedDadosPagamento;
 
-            dispatch({ type: FETCH_AVALIACOES, avaliacoes: loadedEvaluations });
+            loadedDadosPagamento = new DadosPagamento(resData.id, resData.nomeTitular, resData.numero, resData.validade,
+                resData.cvv, resData.parcelas, resData.valorParcela, resData.usuario)
+
+            dispatch({ type: FETCH_DADOS_PAGAMENTO, dadosPagamento: loadedDadosPagamento });
         }
 
     } catch (err) {

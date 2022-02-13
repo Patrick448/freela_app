@@ -22,6 +22,7 @@ import userReducer from "./src/store/reducers/userReducer"
 import servicosReducer from "./src/store/reducers/servicosReducer";
 import contratosReducer from "./src/store/reducers/contratosReducer";
 import avaliacoesReducer from "./src/store/reducers/avaliacoesReducer";
+import dadosPagamentoReducer from "./src/store/reducers/dadosPagamentoReducer";
 
 
 const appReducer = combineReducers({
@@ -29,6 +30,7 @@ const appReducer = combineReducers({
     servicos: servicosReducer,
     contratos: contratosReducer,
     avaliacoes: avaliacoesReducer,
+    dadosPagamento: dadosPagamentoReducer,
 });
 
 const rootReducer = (state, action) => {
