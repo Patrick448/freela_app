@@ -47,9 +47,9 @@ export const fetchServicos = (num, buscaContratante) => {
 export const loadMoreServicos = (num, buscaContratante) => {
     return async (dispatch, getState) => {
         const token = getState().user.token;
-        console.log(getState());
 
-        const paginaAtual = buscaContratante?  getState().servicosOferecidos.pagina : getState().servicosProcurados.pagina;
+        console.log(getState());
+        const paginaAtual = (buscaContratante?  getState().servicos.servicosOferecidos.pagina : getState().servicos.servicosProcurados.pagina);
 
 
 
