@@ -49,17 +49,18 @@ export default (state = initialState, action) =>{
                 return{
                     ...state,
                     servicosOferecidos:{
-                        lista:[...state.servicosOferecidos, action.listaServicos],
+                        lista:[...state.servicosOferecidos.lista, ...action.listaServicos],
                         pagina:action.pagina,
                         numPaginas: action.numPaginas
                     }
 
                 };
             }else{
+
                 return{
                     ...state,
                     servicosProcurados:{
-                        lista:[...state.servicosProcurados, action.listaServicos],
+                        lista:[...state.servicosProcurados.lista, ...action.listaServicos],
                         pagina:action.pagina,
                         numPaginas: action.numPaginas
 

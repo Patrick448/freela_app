@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StatusBar as RNStatusBar} from 'react-native';
+import {Button, StatusBar as RNStatusBar} from 'react-native';
 import { StyleSheet, Text, View, RefreshControl, ActivityIndicator} from 'react-native';
 import { FlatList, ScrollView, Dimensions } from 'react-native';
 import ListItem from '../components/ListItem';
@@ -11,6 +11,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import * as servicosActions from "../store/actions/servicosActions";
 import * as userActions from "../store/actions/userActions";
+import {TouchableOpacity} from "react-native-gesture-handler";
 
 
 const data = [
@@ -116,7 +117,7 @@ const ServicosScreen = props=> {
     try {
       setLoading(true)
       console.log("trying to fetch servicos")
-      await dispatch(servicosActions.loadMoreServicos(3, switchState));
+      await dispatch(servicosActions.loadMoreServicos(3, !switchState));
     } catch (err) {
       setLoading(false);
       setError(err.message);
@@ -162,7 +163,16 @@ const ServicosScreen = props=> {
             onEndReachedThreshold={0.1}
             contentContainerStyle={{paddingBottom:70}}
             ListFooterComponent={
-          loading? <ActivityIndicator size="large" color={Colors.secondaryColor}/> :null
+              //<TouchableOpacity onPress={()=>{}}>
+             //   <Text style={{color:Colors.secondaryColor}}>CARREGAR MAIS</Text>
+             // </TouchableOpacity>
+
+              <View style={{height: 70}}>
+                {loading?
+                <ActivityIndicator visible={loading} size="large" color={Colors.secondaryColor}/>:
+                    null}
+              </View>
+
         }
         refreshControl={
           <RefreshControl

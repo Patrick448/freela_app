@@ -48,9 +48,8 @@ export const loadMoreServicos = (num, buscaContratante) => {
     return async (dispatch, getState) => {
         const token = getState().user.token;
 
-        console.log(getState());
+        //console.log(getState());
         const paginaAtual = (buscaContratante?  getState().servicos.servicosOferecidos.pagina : getState().servicos.servicosProcurados.pagina);
-
 
 
         const response = await fetch(
@@ -66,7 +65,7 @@ export const loadMoreServicos = (num, buscaContratante) => {
         );
 
 
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
 
         if (!response.ok) {
             throw new Error("Problema ao carregar servicos.");
@@ -76,14 +75,16 @@ export const loadMoreServicos = (num, buscaContratante) => {
         const listaServicos = pagedResponse.content;
         const pageNumber = pagedResponse.pageable.pageNumber;
         const pages = pagedResponse.totalPages;
-        console.log("carrrega mais> resposta:")
-        console.log(pagedResponse);
+        //console.log("carrrega mais> resposta:")
+        //console.log(pagedResponse);
 
 
         dispatch({type: LOAD_MORE_SERVICOS, buscaContratante: buscaContratante, pagina: pageNumber, numPaginas: pages, listaServicos:listaServicos})
 
+        //console.log(listaServicos)
+        //console.log(getState());
+        //console.log("aaaaaaa")
 
-        console.log(listaServicos)
     };
 };
 
