@@ -65,117 +65,159 @@ const CadastroScreen = (props) => {
 	}
 
 	return (
-		<ScrollView contentContainerStyle={styles.container}>
+		<ScrollView>
+			<View style={styles.container}>
+				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+					<Formik
+						initialValues={initialValues}
+						onSubmit={onSubmit}
+					>
+						{(formikProps) => (
+							<View style={styles.formContainer}>
+								<View style={styles.textBox}>
+									<Text style={styles.title}>Dados Pessoais</Text>
+								</View>
 
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				<Formik
-					initialValues={initialValues}
-					onSubmit={onSubmit}
-				>
-					{(formikProps) => (
+								<Text style={{ alignSelf: 'flex-start',
+									marginLeft: 4,
+									marginBottom: 2,
+									color: Colors.primaryColor, }}>
+									Nome
+								</Text>
+								<TextInput
+									placeholderTextColor='#AFAFAF'
+									placeholder='Digite seu nome'
+									style={{ ...styles.input, marginBottom: 12 }}
+									onChangeText={formikProps.handleChange('nome')}
+									onBlur={formikProps.handleBlur('nome')}
+									value={formikProps.values.nome}
+									touched={formikProps.touched.nome}
+									keyboardType='email-address'
+									autoCapitalize='none'
+									autoCorrect={false}
+									returnKeyType='next'
+									selectionColor={Colors.primaryColor}
+								/>
 
-					)}
-				</Formik>
-			</TouchableWithoutFeedback>
-			<View style={styles.textBox}>
-				<Text style={styles.title}>Dados Pessoais</Text>
-			</View>
+								<FormPicker style={{width:"100%"}}
+									title="Gênero"
+									value={formikProps.values.genero}
+									onValueChange={itemValue => {
+										formikProps.setFieldValue('genero', itemValue)
+									}}
+									touched={formikProps.touched.genero}
+								></FormPicker>
 
-			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor, textAlign: "left" }}>
-				Nome
-			</Text>
-			<TextInput
-				placeholderTextColor='#AFAFAF'
-				placeholder='Digite seu nome'
-				style={{ ...styles.input, marginBottom: 12 }}
-				onSubmitEditing={() => {}}
-				keyboardType='email-address'
-				autoCapitalize='none'
-				autoCorrect={false}
-				returnKeyType='next'
-				selectionColor={Colors.primaryColor}
-			/>
+								<Text style={{ alignSelf: 'flex-start',
+									marginLeft: 4,
+									marginBottom: 2,
+									color: Colors.primaryColor, }}>
+									Data de Nascimento
+								</Text>
+								<FormDate
+									title="Data de Nascimento"
+									value={formikProps.values.dataNascimento}
+									onValueChange={itemValue => {
+										formikProps.setFieldValue('dataNascimento', itemValue)
+									}}
+									onChangeDate={chosenDate => {
+										setDate(chosenDate)
+									}}
+									touched={formikProps.touched.dataNascimento}
+								></FormDate>
 
-			<View style={styles.textBox}>
-				<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
-					Gênero
-				</Text>
-			</View>
+								<Text style={{ alignSelf: 'flex-start',
+									marginLeft: 4,
+									marginBottom: 2,
+									color: Colors.primaryColor, }}>
+									Telefone
+								</Text>
+								<TextInput
+									placeholderTextColor='#AFAFAF'
+									placeholder='Digite seu telefone'
+									style={{ ...styles.input, marginBottom: 12 }}
+									onChangeText={formikProps.handleChange('telefone')}
+									onBlur={formikProps.handleBlur('telefone')}
+									value={formikProps.values.telefone}
+									touched={formikProps.touched.telefone}
+									keyboardType='number-pad'
+									autoCapitalize='none'
+									autoCorrect={false}
+									returnKeyType='next'
+									selectionColor={Colors.primaryColor}
+								/>
 
-			<FormPicker style={{width:"100%"}}></FormPicker>
+								<View style={styles.textBox}>
+									<Text style={styles.title}>Dados de Acesso</Text>
+								</View>
 
-			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
-				Data de Nascimento
-			</Text>
-			<FormDate></FormDate>
+								<Text style={{ alignSelf: 'flex-start',
+									marginLeft: 4,
+									marginBottom: 2,
+									color: Colors.primaryColor, }}>
+									E-mail
+								</Text>
+								<TextInput
+									placeholderTextColor='#AFAFAF'
+									placeholder='Digite seu e-mail'
+									style={{ ...styles.input, marginBottom: 12 }}
+									onSubmitEditing={() => {}}
+									keyboardType='email-address'
+									onChangeText={formikProps.handleChange('email')}
+									onBlur={formikProps.handleBlur('email')}
+									value={formikProps.values.email}
+									error={formikProps.errors.email}
+									autoCapitalize='none'
+									autoCorrect={false}
+									returnKeyType='next'
+									selectionColor={Colors.primaryColor}
+								/>
 
-			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
-				Telefone
-			</Text>
-			<TextInput
-				placeholderTextColor='#AFAFAF'
-				placeholder='Digite seu telefone'
-				style={{ ...styles.input, marginBottom: 12 }}
-				onSubmitEditing={() => {}}
-				keyboardType='email-address'
-				autoCapitalize='none'
-				autoCorrect={false}
-				returnKeyType='next'
-				selectionColor={Colors.primaryColor}
-			/>
+								<Text style={{ alignSelf: 'flex-start',
+									marginLeft: 4,
+									marginBottom: 2,
+									color: Colors.primaryColor, }}>
+									Senha
+								</Text>
 
-			<View style={styles.textBox}>
-						<Text style={styles.title}>Dados de Acesso</Text>
-			</View>
+								<View style={styles.inputContainerPassword}>
+									<TextInput
+										placeholderTextColor='#AFAFAF'
+										placeholder='Digite sua senha'
+										style={styles.inputPassword}
+										secureTextEntry
+										autoCapitalize='none'
+										returnKeyType='go'
+										selectionColor={Colors.primaryColor}
+									/>
+								</View>
 
-			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
-				E-mail
-			</Text>
-			<TextInput
-				placeholderTextColor='#AFAFAF'
-				placeholder='Digite seu e-mail'
-				style={{ ...styles.input, marginBottom: 12 }}
-				onSubmitEditing={() => {}}
-				keyboardType='email-address'
-				autoCapitalize='none'
-				autoCorrect={false}
-				returnKeyType='next'
-				selectionColor={Colors.primaryColor}
-			/>
+								<Text style={{ alignSelf: 'flex-start',
+									marginLeft: 4,
+									marginBottom: 2,
+									color: Colors.primaryColor, }}>
+									Repetir Senha
+								</Text>
 
-			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
-				Senha
-			</Text>
+								<View style={styles.inputContainerPassword}>
+									<TextInput
+										placeholderTextColor='#AFAFAF'
+										placeholder='Repita sua senha'
+										style={styles.inputPassword}
+										secureTextEntry
+										autoCapitalize='none'
+										returnKeyType='go'
+										selectionColor={Colors.primaryColor}
+									/>
+								</View>
 
-			<View style={styles.inputContainerPassword}>
-				<TextInput
-					placeholderTextColor='#AFAFAF'
-					placeholder='Digite sua senha'
-					style={styles.inputPassword}
-					secureTextEntry
-					autoCapitalize='none'
-					returnKeyType='go'
-					selectionColor={Colors.primaryColor}
-				/>
-			</View>
-
-			<Text style={{ marginLeft: 4, marginBottom: 2, color: Colors.primaryColor }}>
-				Repetir Senha
-			</Text>
-
-			<View style={styles.inputContainerPassword}>
-				<TextInput
-					placeholderTextColor='#AFAFAF'
-					placeholder='Repita sua senha'
-					style={styles.inputPassword}
-					secureTextEntry
-					autoCapitalize='none'
-					returnKeyType='go'
-					selectionColor={Colors.primaryColor}
-				/>
-			</View>
-			<View style={{width:"100%", alignItems:'center'}}>
-				<FormButton title="Criar conta" colorBack={Colors.primaryColor} width="60%"></FormButton>
+								<View style={{width:"100%", alignItems:'center'}}>
+									<FormButton title="Criar conta" colorBack={Colors.primaryColor} width="60%"></FormButton>
+								</View>
+							</View>
+						)}
+					</Formik>
+				</TouchableWithoutFeedback>
 			</View>
 		</ScrollView>
 	);
@@ -199,7 +241,8 @@ const styles = StyleSheet.create({
 		elevation: 5,
 	},
 	formContainer: {
-		width: Dimensions.get('window').width * 0.95,
+		alignItems: 'center',
+		width: '100%',
 	},
 	input: {
 		height: 50,

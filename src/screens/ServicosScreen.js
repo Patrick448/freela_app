@@ -7,7 +7,11 @@ import { TabBg } from '../components/TabBg';
 import TextSwitch from '../components/TextSwitch';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import * as servicosActions from "../store/actions/servicosActions";
+import * as userActions from "../store/actions/userActions";
+
 
 const data = [
   {id: 1,
@@ -50,14 +54,34 @@ const data = [
 
 const ServicosScreen = props=> {
 
-
-const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
-
-const [switchState, setSwitchState] = useState(0);
+  const dispatch = useDispatch();
+  const servicosFeed = useSelector(state=> state.servicos.servicosFeed);
+  const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
+  const [switchState, setSwitchState] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const onSwitchHandler = (state)=>{
       setSwitchState(state);
   }
+
+   const tryFetchServicos =async ()=>{
+    setError(null);
+
+    try {
+      console.log("trying to fetch servicos")
+      setLoading(true);
+      await dispatch(servicosActions.fetchServicos(20));
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    }
+  }
+
+  useEffect(()=>{
+    tryFetchServicos();
+  }, [])
+
 
   return (
     <View style={styles.container}>

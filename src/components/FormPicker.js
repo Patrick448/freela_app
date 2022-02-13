@@ -95,15 +95,14 @@ const styles = StyleSheet.create({
     pickerContainer:
     {
         width: '100%',
-        marginBottom: 20,
+        marginBottom: 15,
     },
     title: 
     {
         alignSelf: 'flex-start',
         marginLeft: 4,
         marginBottom: 2,
-        color: Colors.secondaryColor,
-        fontWeight: 'bold'
+        color: Colors.primaryColor,
     },
     picker:
     {

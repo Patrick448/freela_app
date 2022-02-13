@@ -5,7 +5,7 @@ import moment from 'moment'
 
 import Colors from '../constants/Colors'
 
-const FormTextInput = props => {
+const FormDate = props => {
 
     const minDate = moment().add(-100, 'years')
     const maxDate = moment().subtract(18, 'years')
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     {
         justifyContent: 'center',
         height: 40,
-        backgroundColor: Colors.secondaryColor,
+        backgroundColor: Colors.primaryColor,
         paddingHorizontal: 10,
         borderBottomWidth: 2,
         borderTopWidth: 2,
@@ -108,4 +108,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FormTextInput;
+export default FormDate;
