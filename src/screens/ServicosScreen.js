@@ -70,7 +70,6 @@ const ServicosScreen = props=> {
 
     try {
       console.log("trying to fetch servicos")
-      setLoading(true);
       await dispatch(servicosActions.fetchServicos(20));
     } catch (err) {
       setLoading(false);
@@ -78,10 +77,19 @@ const ServicosScreen = props=> {
     }
   }
 
-  useEffect(()=>{
-    tryFetchServicos();
-  }, [])
+  const fetchServicos = useCallback(async () => {
+    setLoading(true);
+    await tryFetchServicos();
+    setLoading(false);
+  }, [servicosFeed]);
 
+  useEffect(() => {
+    const subscription = props.navigation.addListener("willFocus", fetchServicos);
+
+    return () => {
+      subscription.remove();
+    };
+  }, [fetchServicos]);
 
   return (
     <View style={styles.container}>
