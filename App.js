@@ -20,11 +20,13 @@ import ReduxThunk from "redux-thunk";
 //Reducers
 import userReducer from "./src/store/reducers/userReducer"
 import servicosReducer from "./src/store/reducers/servicosReducer";
+import contratosReducer from "./src/store/reducers/contratosReducer";
 
 
 const appReducer = combineReducers({
     user: userReducer,
-    servicos: servicosReducer
+    servicos: servicosReducer,
+    contratos: contratosReducer
 });
 
 const rootReducer = (state, action) => {
