@@ -21,12 +21,18 @@ import ReduxThunk from "redux-thunk";
 import userReducer from "./src/store/reducers/userReducer"
 import servicosReducer from "./src/store/reducers/servicosReducer";
 import contratosReducer from "./src/store/reducers/contratosReducer";
+import avaliacoesReducer from "./src/store/reducers/avaliacoesReducer";
+import dadosPagamentoReducer from "./src/store/reducers/dadosPagamentoReducer";
+import chatReducer from "./src/store/reducers/chatReducer";
 
 
 const appReducer = combineReducers({
     user: userReducer,
     servicos: servicosReducer,
-    contratos: contratosReducer
+    contratos: contratosReducer,
+    avaliacoes: avaliacoesReducer,
+    dadosPagamento: dadosPagamentoReducer,
+    chatReducer: chatReducer,
 });
 
 const rootReducer = (state, action) => {
