@@ -12,11 +12,11 @@ const {width} = Dimensions.get('window')
 
 const TabBar = ({ state, descriptors, navigation, centerButtonIcon, centerButtonRoute}) =>{
 
-  console.log(descriptors);
+ // console.log(descriptors);
 
   const onCenterButtonPress =()=>{
     const centerButtonItem = state.routes.find((item)=> item.name == "centerButtonRoute");
-    console.log("center button pressed");
+    //console.log("center button pressed");
 
     
    /* const event = navigation.emit({

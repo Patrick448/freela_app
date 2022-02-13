@@ -7,6 +7,7 @@ export const AUTHENTICATE = 'AUTHENTICATE';
 import Localhost from '../../constants/Localhost';
 
 export const fetchServicos = (num) => {
+    console.log(FETCH_SERVICOS);
     return async (dispatch, getState) => {
         const token = getState().user.token;
 
@@ -22,15 +23,18 @@ export const fetchServicos = (num) => {
             }
         );
 
+        console.log(JSON.stringify(response));
+
         if (!response.ok) {
             throw new Error("Problema ao carregar servicos.");
         }
 
-        const listaServicos = await response.json();
+        const pagedResponse = await response.json();
+        const listaServicos = pagedResponse.content;
 
         dispatch({type: FETCH_SERVICOS, listaServicos:listaServicos})
 
-        console.log(usr)
+        console.log(listaServicos)
     };
 };
 

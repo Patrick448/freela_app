@@ -7,7 +7,7 @@ import { TabBg } from '../components/TabBg';
 import TextSwitch from '../components/TextSwitch';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import * as servicosActions from "../store/actions/servicosActions";
 import * as userActions from "../store/actions/userActions";
@@ -69,27 +69,28 @@ const ServicosScreen = props=> {
     setError(null);
 
     try {
+      setLoading(true);
       console.log("trying to fetch servicos")
       await dispatch(servicosActions.fetchServicos(20));
     } catch (err) {
       setLoading(false);
       setError(err.message);
+    }finally {
+      console.log(servicosFeed);
     }
   }
 
-  const fetchServicos = useCallback(async () => {
-    setLoading(true);
+  /*const fetchServicos = useCallback(async () => {
+
     await tryFetchServicos();
     setLoading(false);
   }, [servicosFeed]);
+*/
 
   useEffect(() => {
-    const subscription = props.navigation.addListener("willFocus", fetchServicos);
+   tryFetchServicos();
 
-    return () => {
-      subscription.remove();
-    };
-  }, [fetchServicos]);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -115,14 +116,14 @@ const ServicosScreen = props=> {
      
         <FlatList
         contentContainerStyle={{paddingBottom:70}}
-        data={data}
+        data={servicosFeed}
         renderItem={({item})=> 
                   (<ListItem 
                   onPress={onItemPress}
-                  title={item.title}
-                  body={item.body}
-                  timeInfo={item.timeInfo}
-                  image={item.image}
+                  title={item.titulo}
+                  body={item.descricao}
+                  timeInfo={item.data}
+                  image={"xx"}
                   id={item.id}/>)}
           keyExtractor={(item) => item.id}/>    
 
