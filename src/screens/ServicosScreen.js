@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StatusBar as RNStatusBar} from 'react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, RefreshControl, ActivityIndicator} from 'react-native';
 import { FlatList, ScrollView, Dimensions } from 'react-native';
 import ListItem from '../components/ListItem';
 import { TabBg } from '../components/TabBg';
@@ -55,16 +55,25 @@ const data = [
 const ServicosScreen = props=> {
 
   const dispatch = useDispatch();
-  const servicosProcuradosFeed = useSelector(state=> state.servicos.servicosProcuradosFeed);
-  const servicosOferecidosFeed = useSelector(state=> state.servicos.servicosOferecidosFeed);
+  const servicosProcuradosFeed = useSelector(state=> state.servicos.servicosProcurados.lista);
+  const servicosOferecidosFeed = useSelector(state=> state.servicos.servicosOferecidos.lista);
   const onItemPress = (key)=>{ console.log(`Item ${key} pressed`)}
   const [switchState, setSwitchState] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(null);
+
 
   const onSwitchHandler = (state)=>{
       setSwitchState(state);
   }
+
+  const endReachedHandler =(e)=>{
+    console.log("end");
+    tryLoadMoreServicos();
+
+  }
+
 
    const tryFetchServicos =async ()=>{
     setError(null);
@@ -72,10 +81,28 @@ const ServicosScreen = props=> {
     try {
       setLoading(true);
       console.log("trying to fetch servicos")
-      await dispatch(servicosActions.fetchServicos(20, true));
-      await dispatch(servicosActions.fetchServicos(20, false));
+      await dispatch(servicosActions.fetchServicos(3, true));
+      await dispatch(servicosActions.fetchServicos(3, false));
     } catch (err) {
       setLoading(false);
+      setError(err.message);
+    }finally {
+      setLoading(false);
+      console.log(servicosProcuradosFeed);
+      console.log(servicosOferecidosFeed);
+    }
+  }
+
+  const tryRefreshServicos =async ()=>{
+    setError(null);
+
+    try {
+      //setLoading(true);
+      console.log("trying to fetch servicos")
+      await dispatch(servicosActions.fetchServicos(3, true));
+      await dispatch(servicosActions.fetchServicos(3, false));
+    } catch (err) {
+      //setLoading(false);
       setError(err.message);
     }finally {
       console.log(servicosProcuradosFeed);
@@ -83,12 +110,23 @@ const ServicosScreen = props=> {
     }
   }
 
-  /*const fetchServicos = useCallback(async () => {
+  const tryLoadMoreServicos =async ()=>{
+    setError(null);
 
-    await tryFetchServicos();
-    setLoading(false);
-  }, [servicosFeed]);
-*/
+    try {
+      setLoading(true)
+      console.log("trying to fetch servicos")
+      await dispatch(servicosActions.loadMoreServicos(3, switchState));
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    }finally {
+      setLoading(false);
+
+     // console.log(servicosProcuradosFeed);
+    }
+  }
+
 
   useEffect(() => {
    tryFetchServicos();
@@ -114,11 +152,25 @@ const ServicosScreen = props=> {
       <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
         <Ionicons name="search-sharp" size={26} color={Colors.secondaryColor}  />
       </View>
+
+
  
       </View>
      
         <FlatList
-        contentContainerStyle={{paddingBottom:70}}
+            onEndReached={endReachedHandler}
+            onEndReachedThreshold={0.1}
+            contentContainerStyle={{paddingBottom:70}}
+            ListFooterComponent={
+          loading? <ActivityIndicator size="large" color={Colors.secondaryColor}/> :null
+        }
+        refreshControl={
+          <RefreshControl
+              refreshing={refreshing}
+              onRefresh={tryRefreshServicos}
+              colors={[Colors.secondaryColor]}
+          />
+        }
         data={switchState? servicosProcuradosFeed: servicosOferecidosFeed}
         renderItem={({item})=> 
                   (<ListItem 
@@ -128,12 +180,10 @@ const ServicosScreen = props=> {
                   timeInfo={item.data}
                   image={"xx"}
                   id={item.id}/>)}
-          keyExtractor={(item) => item.id}/>    
+          keyExtractor={(item) => item.id}/>
 
- 
     </View>
 
-    
   );
 }
 

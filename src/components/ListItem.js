@@ -4,7 +4,7 @@ import Colors from '../constants/Colors';
 
  const ListItem = props => {
 
-   console.log(props);
+   //console.log(props);
 
   return (
 

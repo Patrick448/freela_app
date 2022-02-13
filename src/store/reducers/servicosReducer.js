@@ -1,12 +1,21 @@
 import {
-    FETCH_SERVICOS,
+    FETCH_SERVICOS, LOAD_MORE_SERVICOS,
 } from '../actions/servicosActions';
 
 import Servico from '../../model/Servico'
 
 const initialState = {
-    servicosProcuradosFeed: null,
-    servicosOferecidosFeed: null
+    servicosProcurados:{
+        lista:null,
+        pagina:0,
+        numPaginas:0
+    },
+    servicosOferecidos:{
+        lista:null,
+        pagina:0,
+        numPaginas: 0
+    },
+
 }
 
 export default (state = initialState, action) =>{
@@ -16,13 +25,45 @@ export default (state = initialState, action) =>{
             if(action.buscaContratante){
                 return{
                     ...state,
-                    servicosOferecidosFeed: action.listaServicos,
+                    servicosOferecidos:{
+                        lista:action.listaServicos,
+                        pagina:action.pagina,
+                        numPaginas: action.numPaginas
+                    }
 
                 };
             }else{
                 return{
                     ...state,
-                    servicosProcuradosFeed: action.listaServicos,
+                    servicosProcurados:{
+                        lista:action.listaServicos,
+                        pagina:action.pagina,
+                        numPaginas: action.numPaginas
+
+                    },
+                };
+            }
+
+        case LOAD_MORE_SERVICOS:
+            if(action.buscaContratante){
+                return{
+                    ...state,
+                    servicosOferecidos:{
+                        lista:[...state.servicosOferecidos, action.listaServicos],
+                        pagina:action.pagina,
+                        numPaginas: action.numPaginas
+                    }
+
+                };
+            }else{
+                return{
+                    ...state,
+                    servicosProcurados:{
+                        lista:[...state.servicosProcurados, action.listaServicos],
+                        pagina:action.pagina,
+                        numPaginas: action.numPaginas
+
+                    },
                 };
             }
 
