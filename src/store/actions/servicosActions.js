@@ -43,6 +43,31 @@ export const fetchServicos = (num, buscaContratante) => {
     };
 };
 
+export const registrarServico = (servico) => {
+    return async (dispatch) => {
+
+        const response = await fetch(
+            `http://${Localhost.address}:${Localhost.port}/`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify(servico),
+
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Erro ao registrar serviço");
+        }
+
+        const serv = await response.json();
+
+        console.log(serv)
+    };
+};
 
 export const loadMoreServicos = (num, buscaContratante) => {
     return async (dispatch, getState) => {

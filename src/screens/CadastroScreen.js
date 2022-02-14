@@ -24,6 +24,7 @@ import FormTextInput from '../components/FormTextInput';
 import FormButton from '../components/FormButton';
 import FormPicker from '../components/FormPicker';
 import FormDate from '../components/FormDate';
+import UsuarioNovo from '../model/UsuarioNovo';
 
 import * as userActions from '../store/actions/userActions';
 import { useDispatch } from "react-redux";
@@ -49,11 +50,13 @@ const CadastroScreen = (props) => {
 	const onSubmit = async (values, actions) => {
 		console.log('values: ')
 		console.log(values);
-		const registerValues = new Usuario(values.nome, values.email, values.senha, values.telefone, values.dataNascimento, values.genero, moment())
+		const registerValues = new UsuarioNovo(values.nome, values.email, values.senha,
+			values.dataNascimento, values.genero, values.telefone, moment())
+		console.log(registerValues);
 
 		setLoading(true);
 		try {
-			await dispatch(userActions.signup(registerValues));
+			//await dispatch(userActions.signup(registerValues));
 			setLoading(false);
 			props.navigation.navigate('Login');
 			Alert.alert("Cadastro feito com sucesso!");
@@ -217,7 +220,11 @@ const CadastroScreen = (props) => {
 								</View>
 
 								<View style={{width:"100%", alignItems:'center'}}>
-									<FormButton title="Criar conta" colorBack={Colors.primaryColor} width="60%"></FormButton>
+									<FormButton title="Criar conta" colorBack={Colors.primaryColor}
+												onPress={() => {
+													formikProps.handleSubmit()
+												}}
+												width="60%"></FormButton>
 								</View>
 							</View>
 						)}

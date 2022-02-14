@@ -39,5 +39,31 @@ export const fetchAvaliacoes = () => {
     };
 };
 
+export const registrarAvaliacao = (avaliacao) => {
+    return async (dispatch) => {
+
+        const response = await fetch(
+            `http://${Localhost.address}:${Localhost.port}/`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify(avaliacao),
+
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Erro ao registrar avaliação");
+        }
+
+        const aval = await response.json();
+
+        console.log(aval)
+    };
+};
+
 
 

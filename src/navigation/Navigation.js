@@ -17,6 +17,8 @@ import DetalhesPerfilScreen from '../screens/DetalhesPerfilScreen';
 import CadastroServicoScreen from '../screens/CadastroServicoScreen';
 import PagamentoScreen from '../screens/PagamentoScreen';
 import { useSelector, useDispatch } from 'react-redux'
+import AvaliacaoScreen from "../screens/AvaliacaoScreen";
+import DadosPagamento from "../model/DadosPagamento";
 
 
 

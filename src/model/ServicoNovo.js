@@ -1,6 +1,5 @@
-class Servico {
-    constructor(id, titulo, descricao, anunciante, buscaContratante, buscaPrestador, data, local, preco) {
-        this.id = id;
+class ServicoNovo {
+    constructor(titulo, descricao, anunciante, buscaContratante, buscaPrestador, data, local, preco) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.anunciante = anunciante;
@@ -13,4 +12,4 @@ class Servico {
 
 }
 
-export default Servico;
+export default ServicoNovo;

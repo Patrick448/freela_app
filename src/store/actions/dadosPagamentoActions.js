@@ -37,5 +37,31 @@ export const fetchDadosPagamento = () => {
     };
 };
 
+export const registrarDadosPagamento = (dadosPagamento) => {
+    return async (dispatch) => {
+
+        const response = await fetch(
+            `http://${Localhost.address}:${Localhost.port}/`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify(dadosPagamento),
+
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Erro ao registrar dados de pagamento");
+        }
+
+        const dp = await response.json();
+
+        console.log(dp)
+    };
+};
+
 
 

@@ -122,7 +122,7 @@ export const signup = (jsonForm) => {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
                 },
-                body: jsonForm.senha,
+                body: JSON.stringify(jsonForm),
             }
         );
 
