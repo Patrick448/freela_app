@@ -39,9 +39,8 @@ const CadastroServicoScreen = props=> {
   const onSubmit = async (values) => {
     console.log('values: ')
     console.log(values);
-    // anunciante deve vir por props?
-    // local?
-    const servico = new ServicoNovo(values.titulo, values.descricao, values.anunciante,
+
+    const servico = new ServicoNovo(values.titulo, values.descricao, props.anunciante,
         values.buscaContratante, values.buscaPrestador, moment(), values.local, values.preco)
     console.log(servico);
 
@@ -124,13 +123,19 @@ const CadastroServicoScreen = props=> {
                       selectionColor={Colors.primaryColor}
                   />
 
-                  <View style={{width:"85%", alignItems:'flex-start', paddingTop: 25}}>
-
-                    <FlatButton title='Local' onPress={() => {}} style={{paddingTop:50}} textStyle={{color:Colors.primaryColor, fontSize:18}}>
-                      <Ionicons name="ios-location-outline" size={24} color={Colors.primaryColor}/>
-                    </FlatButton>
-
-                  </View>
+                  <TextInput
+                      textAlignVertical='top'
+                      onChangeText={formikProps.handleChange('local')}
+                      onBlur={formikProps.handleBlur('local')}
+                      value={formikProps.values.local}
+                      touched={formikProps.touched.local}
+                      style={{...styles.titleInput, marginTop: 15}}
+                      placeholderTextColor='#AFAFAF'
+                      placeholder='Local'
+                      autoCapitalize='none'
+                      returnKeyType='go'
+                      selectionColor={Colors.primaryColor}
+                  />
 
 
 
