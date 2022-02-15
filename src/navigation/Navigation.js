@@ -16,7 +16,8 @@ import StartupLogin from '../screens/StartupLogin';
 import DetalhesPerfilScreen from '../screens/DetalhesPerfilScreen';
 import CadastroServicoScreen from '../screens/CadastroServicoScreen';
 import PagamentoScreen from '../screens/PagamentoScreen';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+import StartupScreen from '../screens/StartupScreen';
 import AvaliacaoScreen from "../screens/AvaliacaoScreen";
 import DadosPagamento from "../model/DadosPagamento";
 
@@ -106,8 +107,9 @@ const LoginStackNavigator = () => {
      
     return (
         <LoginStack.Navigator >
+            <LoginStack.Screen  name="StartupScreen" options={navigationOptions} component={StartupScreen}/>
             <LoginStack.Screen  name="Login" options={navigationOptions} component={LoginScreen}/>
-            <LoginStack.Screen  name="Startup" options={navigationOptions} component={StartupLogin}/>    
+            <LoginStack.Screen  name="Startup" options={navigationOptions} component={StartupLogin}/>
             <LoginStack.Screen  name="Cadastro"  options={navigationOptions} component={CadastroScreen}/>
         </LoginStack.Navigator>
     )
@@ -144,8 +146,8 @@ export default function AppNavigator() {
     return (
   
     <NavigationContainer>
-    {loggedIn? <MainStackNavigator/> :<LoginStackNavigator/>}
-        
+    {/*{loggedIn? <MainStackNavigator/> :<LoginStackNavigator/>}*/}
+        <MainStackNavigator/>
     </NavigationContainer>
       
     );

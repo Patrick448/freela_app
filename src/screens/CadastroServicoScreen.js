@@ -28,7 +28,6 @@ const CadastroServicoScreen = props=> {
   const initialValues = {
     titulo: "",
     descricao: "",
-    anunciante: "",
     buscaContratante: false,
     buscaPrestador: true,
     data: "",
@@ -40,8 +39,8 @@ const CadastroServicoScreen = props=> {
     console.log('values: ')
     console.log(values);
 
-    const servico = new ServicoNovo(values.titulo, values.descricao, props.anunciante,
-        values.buscaContratante, values.buscaPrestador, moment(), values.local, values.preco)
+    const servico = new ServicoNovo(values.titulo, values.descricao, values.buscaContratante,
+        values.buscaPrestador, values.local, values.preco)
     console.log(servico);
 
 
@@ -50,6 +49,7 @@ const CadastroServicoScreen = props=> {
       //await dispatch(servicosActions.registrarServico(servico));
       setLoading(false);
       Alert.alert("Serviço registrado com sucesso!");
+      props.navigation.pop(1);
     } catch (error) {
       setLoading(false);
       Alert.alert("Falha ao registrar serviço");

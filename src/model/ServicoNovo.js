@@ -1,11 +1,9 @@
 class ServicoNovo {
-    constructor(titulo, descricao, anunciante, buscaContratante, buscaPrestador, data, local, preco) {
+    constructor(titulo, descricao, buscaContratante, buscaPrestador, local, preco) {
         this.titulo = titulo;
         this.descricao = descricao;
-        this.anunciante = anunciante;
         this.buscaContratante = buscaContratante;
         this.buscaPrestador = buscaPrestador;
-        this.data = data;
         this.local = local;
         this.preco = preco;
     }

@@ -7,14 +7,36 @@ import Colors from '../constants/Colors';
 import {useState} from 'react'
 import RoundButton from '../components/RoundButton';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const DetalhesPerfilScreen = props=> {
 
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+
+  const user = useSelector((state) => state.user.currentUser);
+
   const [editable, setEditable] = useState(false);
-  const [emailInputText, setEmailInputText] = useState("pessoa.silva@gmail.com");
-  const [numberInputText, setNumberInputText] = useState("21 9 0357 8475");
-  const [birthDateInputText, setBirthDateInputText] = useState("21/10/1999");
+  const [emailInputText, setEmailInputText] = useState(user.email);
+  const [numberInputText, setNumberInputText] = useState(user.telefone);
+  const [birthDateInputText, setBirthDateInputText] = useState(user.dataNascimento)
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert('Um erro ocorreu!', error, [{ text: 'Ok' }]);
+    }
+  }, [error]);
+
+  if (loading) {
+    return (
+        <View style={styles.loading}>
+          <ActivityIndicator size='large' color={Colors.primaryColor} />
+        </View>
+    );
+  }
 
   const editButtonPressHandler=()=>{
     setEditable(!editable);
@@ -27,8 +49,8 @@ const DetalhesPerfilScreen = props=> {
       <View style={{flexDirection:'column', alignItems:'center', paddingTop:15}}>
 
           <View style={{height:150, width: 150, backgroundColor:Colors.lightBlue, borderRadius: 75}}/>
-            <Text style={styles.name}>Nome da Pessoa da Silva</Text>
-            <Stars stars={4} size={24} side="left"/>
+            <Text style={styles.name}>{user.nome}</Text>
+            <Stars stars={user.estrelas} size={24} side="left"/>
       </View>    
 
       <View style={styles.inputsView}>

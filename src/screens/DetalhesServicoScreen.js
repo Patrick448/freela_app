@@ -20,19 +20,34 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import FormButton from '../components/FormButton';
+import {useDispatch, useSelector} from "react-redux";
 
 const DetalhesServicoScreen = (props) => {
+
+    const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
+
+
+    if (props.procurado) {
+        const services = useSelector((state) => state.servicos.servicosProcurados);
+    } else {
+        const services = useSelector((state) => state.servicos.servicosOferecidos);
+    }
+
+    const currentService = services.find(element => element.id == props.idItem);
 
 	return (
 		<View style={{flex: 1, backgroundColor: Colors.white}}>
 			<View style={{paddingTop: 40, paddingLeft: 15, justifyContent: 'center', alignContent: 'center'}}>
-			<Text style={{fontSize:18, fontFamily:'red-hat-medium'}}>Ofereço serviço de design de interiores</Text>
+			<Text style={{fontSize:18, fontFamily:'red-hat-medium'}}>{currentService.titulo}</Text>
       		</View>
 			<Image>
 			</Image>
 			<View style={styles.description}>
 				<Text style={styles.title}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac pretium eros, non condimentum turpis. Quisque vulputate velit non ultrices faucibus. Morbi eu rutrum ligula, in tempus tortor. Ut vel tempus velit. In id lacus at odio varius semper. Ut in nisl sed metus consequat placerat. Donec dictum metus eget turpis porttitor pretium. Aenean mollis lacinia nisi non dignissim.
+                    {currentService.descricao}
 				</Text>
 			</View>
 			<LineSeparator></LineSeparator>
@@ -47,7 +62,7 @@ const DetalhesServicoScreen = (props) => {
                     />
                 </View>
                 <View style={styles.containerTitle}>
-                    <Text style={styles.title}>  Michael Northon</Text>
+                    <Text style={styles.title}>{currentService.anunciante}</Text>
                 </View>
                 
             </View>
@@ -63,7 +78,7 @@ const DetalhesServicoScreen = (props) => {
                     />
                 </View>
                 <View style={styles.containerTitle}>
-                    <Text style={styles.title}>R$500,00</Text>
+                    <Text style={styles.title}>{currentService.preco}</Text>
                 </View>
                 
             </View>
@@ -79,7 +94,7 @@ const DetalhesServicoScreen = (props) => {
                     />
                 </View>
                 <View style={styles.containerTitle}>
-                    <Text style={styles.title}> Horário</Text>
+                    <Text style={styles.title}> Horário a combinar</Text>
                 </View>
                 
             </View>
@@ -95,7 +110,7 @@ const DetalhesServicoScreen = (props) => {
                     />
                 </View>
                 <View style={styles.containerTitle}>
-                    <Text style={styles.title}> Local</Text>
+                    <Text style={styles.title}>{currentService.local}</Text>
                 </View>
                 
             </View>

@@ -141,7 +141,7 @@ export const logout = () => {
         const token = getState().user.token;
 
         const response = await fetch(
-            `http://${Localhost.address}:${Localhost.port}/aes/webresources/authenticate/secured/logout/${token}/`,
+            `http://${Localhost.address}:${Localhost.port}/`,
             {
                 method: 'DELETE',
                 headers: {

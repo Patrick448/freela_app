@@ -184,7 +184,9 @@ const ServicosScreen = props=> {
         data={switchState? servicosProcuradosFeed: servicosOferecidosFeed}
         renderItem={({item})=> 
                   (<ListItem 
-                  onPress={onItemPress}
+                  onPress={() => {
+                    props.navigation.navigate("DetalhesServico", {idItem: item.id, procurado: switchState})
+                  }}
                   title={item.titulo}
                   body={item.descricao}
                   timeInfo={DateTimeUtils.getDateDifference(Date.parse(item.data))}

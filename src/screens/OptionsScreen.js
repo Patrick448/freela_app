@@ -17,17 +17,49 @@ import LinearGradient from 'react-native-linear-gradient';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import LineSeparator from '../components/LineSeparator';
-import { Line } from 'react-native-svg';
+import * as usuarioActions from '../store/actions/userActions';
+import {useDispatch} from "react-redux";
 
 const OptionsScreen = (props) => {
 	const [pressed, setPressed] = useState(false);
+    const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
+
+    const logout = useCallback(() => {
+        setError(null);
+
+        try {
+            setLoading(true);
+            //dispatch(usuarioActions.logout());
+        } catch (err) {
+            setLoading(false);
+            setError(err.message);
+        }
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (error) {
+            Alert.alert('Um erro ocorreu!', error, [{ text: 'Ok' }]);
+        }
+    }, [error]);
+
+    if (loading) {
+        return (
+            <View style={styles.loading}>
+                <ActivityIndicator size='large' color={Colors.primaryColor} />
+            </View>
+        );
+    }
+
 	return (
 		<View style={{flex: 1, backgroundColor: Colors.white}}>
 			<View style={{paddingTop: 40, paddingLeft: 15, flexDirection:'row', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
 			<Text style={{fontSize:20, fontFamily:'red-hat-medium'}}>Opções</Text>
       		</View>
 
-			<View>
+			<TouchableOpacity onPress={() => {props.navigation.navigate("DetalhesPerfil")}}>
             <View style={styles.containerText}>
 
                 <View style={styles.userIcon}>
@@ -42,7 +74,7 @@ const OptionsScreen = (props) => {
                 </View>
                 
             </View>
-        	</View>
+        	</TouchableOpacity>
 			<LineSeparator></LineSeparator>
 			<View>
             <View style={{...styles.containerText, alignItems: "space-between"}}>
@@ -74,7 +106,7 @@ const OptionsScreen = (props) => {
             </View>
         	</View>
 			<LineSeparator></LineSeparator>
-			<View>
+			<TouchableOpacity onPress={logout}>
             <View style={styles.containerText}>
 
                 <View style={{...styles.userIcon}}>
@@ -89,7 +121,7 @@ const OptionsScreen = (props) => {
                 </View>
                 
             </View>
-        	</View>
+        	</TouchableOpacity>
 		</View>
 	);
 };
