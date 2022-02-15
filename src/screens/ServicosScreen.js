@@ -11,6 +11,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import * as servicosActions from "../store/actions/servicosActions";
 import * as userActions from "../store/actions/userActions";
+import * as DateTimeUtils from "../utils/DateTimeUtils"
 import {TouchableOpacity} from "react-native-gesture-handler";
 
 
@@ -52,7 +53,7 @@ const data = [
     timeInfo:"1 horas atrás",
     image:""}]
 
-
+//todo: guardar posição da lista de servicos nos dois lados
 const ServicosScreen = props=> {
 
   const dispatch = useDispatch();
@@ -74,7 +75,6 @@ const ServicosScreen = props=> {
     tryLoadMoreServicos();
 
   }
-
 
    const tryFetchServicos =async ()=>{
     setError(null);
@@ -187,7 +187,7 @@ const ServicosScreen = props=> {
                   onPress={onItemPress}
                   title={item.titulo}
                   body={item.descricao}
-                  timeInfo={item.data}
+                  timeInfo={DateTimeUtils.getDateDifference(Date.parse(item.data))}
                   image={"xx"}
                   id={item.id}/>)}
           keyExtractor={(item) => item.id}/>

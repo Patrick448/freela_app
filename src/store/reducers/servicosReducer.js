@@ -1,5 +1,6 @@
 import {
-    FETCH_SERVICOS, LOAD_MORE_SERVICOS,
+    CREATE_SERVICO,
+    FETCH_SERVICOS, FETCH_SERVICOS_USUARIO_ATUAL, LOAD_MORE_SERVICOS,
 } from '../actions/servicosActions';
 
 import Servico from '../../model/Servico'
@@ -15,6 +16,8 @@ const initialState = {
         pagina:0,
         numPaginas: 0
     },
+
+    historico:null,
 
 }
 
@@ -67,6 +70,14 @@ export default (state = initialState, action) =>{
                     },
                 };
             }
+        case CREATE_SERVICO:
+
+        case FETCH_SERVICOS_USUARIO_ATUAL:
+            return {
+                ...state,
+                historico: action.listaServicos
+            }
+
 
         default:
             return state;

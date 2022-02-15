@@ -1,11 +1,12 @@
 import {
-    FETCH_CONTRATOS,
+    FETCH_CONTRATOS, FETCH_CONTRATOS_USUARIO_ATUAL,
 } from '../actions/contratosActions';
 
 import Servico from '../../model/Servico'
 
 const initialState = {
-    contratos: []
+    contratos: [],
+    historico:[]
 }
 
 export default (state = initialState, action) =>{
@@ -15,6 +16,11 @@ export default (state = initialState, action) =>{
             return{
                 ...state,
                 contratos: action.contratos,
+            };
+        case FETCH_CONTRATOS_USUARIO_ATUAL:
+            return{
+                ...state,
+                historico: action.contratos,
             };
         default:
             return state;

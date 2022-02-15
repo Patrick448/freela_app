@@ -74,12 +74,12 @@ const CadastroServicoScreen = props=> {
                   <TextSwitch
                       text0="Contrate"
                       text1="Ofereça"
-                      onChangeValue={() => {
+                      state={switchState}
+                      onSwitch={(state)=> {
+                        setSwitchState(state)
                         formikProps.setFieldValue("buscaPrestador", !formikProps.values.buscaPrestador);
                         formikProps.setFieldValue("buscaContratante", !formikProps.values.buscaContratante);
-                      }}
-                      state={switchState}
-                      onSwitch={(state)=>setSwitchState(state)}/>
+                      }}/>
                 </View>
 
                 <View style={{ alignItems:'center'}}>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
 
   titleInput:{
-    width: "85%", 
+    width: "100%",
     height:40,
     padding:5, 
     borderRadius:10, 
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   descriptionInput:{
     marginTop:15,
-    width: "85%", 
+    width: "100%",
     minHeight:120,
     padding:5, 
     borderRadius:10, 
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   },
   valueInput:{
     marginTop:15,
-    width: "85%", 
+    width: "100%",
     height:40,
     padding:5, 
     borderRadius:10, 

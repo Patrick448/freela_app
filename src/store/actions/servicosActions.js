@@ -1,11 +1,45 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const FETCH_SERVICOS = 'FETCH_SERVICOS';
+export const FETCH_SERVICOS_USUARIO_ATUAL = 'FETCH_SERVICOS_USUARIO_ATUAL';
 export const LOAD_MORE_SERVICOS = 'LOAD_MORE_SERVICOS';
-export const LOGOUT = 'LOGOUT';
-export const AUTHENTICATE = 'AUTHENTICATE';
+export const CREATE_SERVICO = 'CREATE_SERVICO';
+
 
 import Localhost from '../../constants/Localhost';
+
+
+export const fetchServicosUsuarioAtual = () => {
+    return async (dispatch, getState) => {
+        const token = getState().user.token;
+
+        const response = await fetch(
+            `http://${Localhost.address}:${Localhost.port}/services/current-user`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        console.log(JSON.stringify(response));
+
+        if (!response.ok) {
+            throw new Error("Problema ao carregar servicos.");
+        }
+
+        const listaServicos = await response.json();
+
+        dispatch({type: FETCH_SERVICOS_USUARIO_ATUAL, listaServicos:listaServicos})
+
+console.log("Terminou " + FETCH_SERVICOS_USUARIO_ATUAL)
+        console.log(listaServicos)
+        console.log("...")
+    };
+};
 
 export const fetchServicos = (num, buscaContratante) => {
     console.log(FETCH_SERVICOS);
@@ -44,15 +78,18 @@ export const fetchServicos = (num, buscaContratante) => {
 };
 
 export const registrarServico = (servico) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
+        const token = getState().user.token;
+
 
         const response = await fetch(
-            `http://${Localhost.address}:${Localhost.port}/`,
+            `http://${Localhost.address}:${Localhost.port}/services/register`,
             {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
+                    Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(servico),
 
@@ -68,6 +105,7 @@ export const registrarServico = (servico) => {
         console.log(serv)
     };
 };
+
 
 export const loadMoreServicos = (num, buscaContratante) => {
     return async (dispatch, getState) => {

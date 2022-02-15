@@ -29,7 +29,7 @@ const TextSwitch = props => {
             style={styles.touchable} 
                 onPress={()=>{
                     props.onSwitch(0);
-                    props.onChangeValue();
+                    //props.onChangeValue();
                 }}  >
                 <View style={props.state ? styles.textItemInactive :styles.textItemActive}>
                     <Text style={styles.text1}>{props.text0}</Text>
@@ -40,7 +40,7 @@ const TextSwitch = props => {
         <View style={{borderRadius: 10, overflow:'hidden'}}>
             <TouchableWithoutFeedback onPress={() => {
                     props.onSwitch(1);
-                    props.onChangeValue();
+                    //props.onChangeValue();
                 }
             }>
                 <View style={props.state ? styles.textItemActive :styles.textItemInactive}>

@@ -1,13 +1,19 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { StatusBar as RNStatusBar} from 'react-native';
+import {RefreshControl, StatusBar as RNStatusBar} from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { FlatList, ScrollView, Dimensions } from 'react-native';
 import ListItem from '../components/ListItem';
 import { TabBg } from '../components/TabBg';
 import TextSwitch from '../components/TextSwitch';
+import { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import Colors from '../constants/Colors';
 import HistoryListItem from '../components/HistoryListItem'
+import * as contratosActions from "../store/actions/contratosActions";
+import * as servicosActions from "../store/actions/servicosActions";
+import * as DateTimeUtils from "../utils/DateTimeUtils"
+
 
 const data = [
     {id: 1,
@@ -54,6 +60,54 @@ const data = [
       image:"", status: 1, rating: 0}]
 
 const HistoricoServicosScreen = props=> {
+  const dispatch = useDispatch();
+  const historicoServicos = useSelector(state=> state.servicos.historico);
+  const historicoContratos  = useSelector(state=> state.contratos.historico);
+  const [switchState, setSwitchState] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState(null);
+
+  const tryFetchHistorico =async ()=>{
+    setError(null);
+
+    try {
+      setLoading(true);
+      console.log("trying to fetch history")
+      await dispatch(servicosActions.fetchServicosUsuarioAtual());
+      await dispatch(contratosActions.fetchContratosUsuarioAtual());
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    }finally {
+      setLoading(false);
+      console.log(historicoServicos);
+      console.log(historicoServicos);
+    }
+  }
+
+  const tryRefreshHistorico =async ()=>{
+    setError(null);
+
+    try {
+      setRefreshing(true);
+      console.log("trying to refresh history")
+      await dispatch(servicosActions.fetchServicosUsuarioAtual());
+      await dispatch(contratosActions.fetchContratosUsuarioAtual());
+    } catch (err) {
+      setRefreshing(false);
+      setError(err.message);
+    }finally {
+      setRefreshing(false);
+      console.log(historicoServicos);
+      console.log(historicoServicos);
+    }
+  }
+
+  useEffect(() => {
+    tryFetchHistorico();
+
+  }, []);
 
 
   return (
@@ -61,7 +115,7 @@ const HistoricoServicosScreen = props=> {
       <StatusBar style="auto" />
 
       <View style={{padding:15, flexDirection:'row', justifyContent: 'space-between'}}>
-        <Text style={{fontSize:20, fontFamily:'red-hat-medium'}}>Histórico de serviços</Text>
+        <Text style={{fontSize:20, fontFamily:'red-hat-medium'}}>Histórico</Text>
         <Ionicons name="search-sharp" size={26} color={Colors.secondaryColor} />
         
       </View>
@@ -69,19 +123,26 @@ const HistoricoServicosScreen = props=> {
 
       <FlatList
         contentContainerStyle={{paddingBottom:70}}
-        data={data}
+        refreshControl={
+          <RefreshControl
+              refreshing={refreshing}
+              onRefresh={tryRefreshHistorico}
+              colors={[Colors.secondaryColor]}
+          />
+        }
+        data={historicoServicos}
         renderItem={({item})=> 
                   (<HistoryListItem
                   onPress={()=>{}}
-                  title={item.title}
-                  body={item.body}
-                  timeInfo={item.timeInfo}
-                  image={item.image}
+                  title={item.titulo}
+                  body={item.descricao}
+                  timeInfo={DateTimeUtils.formatDate(Date.parse(item.data))}
+                  image={"xx"}
                   id={item.id}
-                  status={item.status}
-                  name={item.name}
-                  date={item.date}
-                  rating={item.rating}/>)}
+                  status={0}
+                  name={""}
+                  date={DateTimeUtils.formatDate(Date.parse(item.data))}
+                  rating={0}/>)}
           keyExtractor={(item) => item.id}/> 
 
        
