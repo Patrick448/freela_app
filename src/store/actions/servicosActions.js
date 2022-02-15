@@ -85,7 +85,7 @@ export const registrarServico = (servico) => {
         const response = await fetch(
             `http://${Localhost.address}:${Localhost.port}/services/register`,
             {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
