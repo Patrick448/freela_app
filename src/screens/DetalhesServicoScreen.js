@@ -21,6 +21,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import FormButton from '../components/FormButton';
 import {useDispatch, useSelector} from "react-redux";
+import Contrato from "../model/Contrato";
+import * as contratosActions from "../store/actions/contratosActions"
 
 const DetalhesServicoScreen = (props) => {
 
@@ -29,12 +31,37 @@ const DetalhesServicoScreen = (props) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
+    const contratar = async (values) => {
+        console.log('values: ')
+        console.log(values);
 
-    if (props.procurado) {
-        const services = useSelector((state) => state.servicos.servicosProcurados);
-    } else {
-        const services = useSelector((state) => state.servicos.servicosOferecidos);
+        const contrato = new Contrato(values.id, 2, values.preco / 2,
+            props.procurado? user.id : values.anuncianteId, props.procurado? values.anuncianteId : user.id)
+        console.log(contrato);
+
+
+        setLoading(true);
+        try {
+            await dispatch(contratosActions.registrarContrato(contrato));
+            setLoading(false);
+            Alert.alert("Contrato registrado com sucesso!");
+            props.navigation.pop(1);
+        } catch (error) {
+            setLoading(false);
+            Alert.alert("Falha ao registrar contrato");
+            // console.error(error)
+        }
     }
+
+
+    let services;
+    if (props.procurado) {
+        services = useSelector((state) => state.servicos.servicosProcurados);
+    } else {
+        services = useSelector((state) => state.servicos.servicosOferecidos);
+    }
+
+    const user = useSelector((state) => state.user.currentUser);
 
     const currentService = services.find(element => element.id == props.idItem);
 
@@ -117,7 +144,7 @@ const DetalhesServicoScreen = (props) => {
         	</View>
 
 			<View style={{justifyContent: "center", alignItems: "center", marginTop: 40}}>
-				<FormButton title="Contratar" colorBack={Colors.secondaryColor} width="30%"></FormButton>
+				<FormButton onPress={contratar(currentService)} title={props.procurado ? "Oferecer" : "Contratar"} colorBack={Colors.secondaryColor} width="30%"></FormButton>
 			</View>
         </View>
 	);

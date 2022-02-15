@@ -1,9 +1,9 @@
 class Servico {
-    constructor(id, titulo, descricao, anunciante, buscaContratante, buscaPrestador, data, local, preco) {
+    constructor(id, titulo, descricao, anuncianteId, buscaContratante, buscaPrestador, data, local, preco) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
-        this.anunciante = anunciante;
+        this.anuncianteId = anuncianteId;
         this.buscaContratante = buscaContratante;
         this.buscaPrestador = buscaPrestador;
         this.data = data;

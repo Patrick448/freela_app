@@ -73,5 +73,34 @@ export const fetchContratos = () => {
     };
 };
 
+export const registrarContrato = (contrato) => {
+    return async (dispatch, getState) => {
+        const token = getState().user.token;
+
+
+        const response = await fetch(
+            `http://${Localhost.address}:${Localhost.port}/contract/register`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(contrato),
+
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Erro ao registrar contrato");
+        }
+
+        const serv = await response.json();
+
+        console.log(serv)
+    };
+};
+
 
 
