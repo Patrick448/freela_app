@@ -128,7 +128,7 @@ function HomeTabs(){
     <Tab.Navigator 
     barStyle={{backgroundColor:'red'}} 
     tabBar={(props)=> 
-    <TabBar {...props} centerButtonRoute="Chat" centerButtonIcon={()=> <Entypo name="plus" size={24} color="white" />}/>
+    <TabBar {...props} centerButtonRoute="CadastroServico" centerButtonIcon={()=> <Entypo name="plus" size={24} color="white" />}/>
    }>
    <Tab.Screen options={homeTabOptions} name="Home" component={ServicosScreen} />
    <Tab.Screen options={chatTabOptions} name="ChatList" component={ChatListScreen} />
@@ -146,8 +146,8 @@ export default function AppNavigator() {
     return (
   
     <NavigationContainer>
-    {/*{loggedIn? <MainStackNavigator/> :<LoginStackNavigator/>}*/}
-        <MainStackNavigator/>
+    {loggedIn? <MainStackNavigator/> :<LoginStackNavigator/>}
+
     </NavigationContainer>
       
     );

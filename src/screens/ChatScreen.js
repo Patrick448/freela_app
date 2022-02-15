@@ -10,12 +10,12 @@ import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import Localhost from "../constants/Localhost";
 
-import firebase from 'firebase/app';
-import 'firebase/firestore'
+//import firebase from 'firebase/app';
+//import 'firebase/firestore'
 import * as auth from 'firebase/auth'
 //import {getDatabase} from 'firebase/database'
-import {useAuthState} from "react-firebase-hooks/auth";
-import {useCollectionData} from "react-firebase-hooks/firestore";
+//import {useAuthState} from "react-firebase-hooks/auth";
+//import {useCollectionData} from "react-firebase-hooks/firestore";
 
 const data = [
     { id:0,
@@ -60,7 +60,7 @@ const data = [
         image:""},
      ]
 
-firebase.initializeApp({
+/*firebase.initializeApp({
     apiKey: "AIzaSyBEUKJRmFe7g966JT7qYlxW1Gj909XwIR4",
     authDomain: "freela-chat.firebaseapp.com",
     projectId: "freela-chat",
@@ -69,17 +69,17 @@ firebase.initializeApp({
     appId: "1:564846707862:web:f581751573310b2af1eeb7",
     measurementId: "G-LNEF47Y32C"
 })
-
-const firestore  = firebase.firestore();
+*/
+//const firestore  = firebase.firestore();
 
 const ChatScreen = props=> {
   const [inputText, setInputText] = useState("");
     let stompClient;
     //const db = getDatabase();
 
-    const messagesRef = firestore.collection('messages');
-    const query = messagesRef.orderBy('createdAt');
-    const [messages] = useCollectionData(query, {idField:'id'});
+    //const messagesRef = firestore.collection('messages');
+    //const query = messagesRef.orderBy('createdAt');
+    //const [messages] = useCollectionData(query, {idField:'id'});
 
 
     const connect = (userId) => {
@@ -140,7 +140,7 @@ const ChatScreen = props=> {
             renderItem={({item})=> 
                     (<ChatBubble
                     onPress={()=>{}}
-                    text={JSON.stringify(messages)}
+                    text={item.text}
                     side={item.sent}
                     time={item.time}
                     status={item.status}/>)}

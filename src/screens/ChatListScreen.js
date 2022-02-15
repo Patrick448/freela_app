@@ -38,7 +38,7 @@ const ChatListScreen = (props) => {
 				data={data}
 				renderItem={({item})=> 
 						(<ChatContact
-						onSelectItem={()=>{}}
+						onSelectItem={()=>{props.navigation.navigate("Chat")}}
 						id={item.id}
 						name={item.name}
 						/>)}
