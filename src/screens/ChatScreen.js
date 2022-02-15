@@ -6,54 +6,119 @@ import ChatBubble from '../components/ChatBubble';
 import { useState } from 'react'
 import RoundButton from '../components/RoundButton';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
+import Localhost from "../constants/Localhost";
 
+import firebase from 'firebase/app';
+import 'firebase/firestore'
+import * as auth from 'firebase/auth'
+//import {getDatabase} from 'firebase/database'
+import {useAuthState} from "react-firebase-hooks/auth";
+import {useCollectionData} from "react-firebase-hooks/firestore";
 
 const data = [
-    { sent: 1,
+    { id:0,
+        sent: 1,
         status:1,
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget\
       rutrum diam. Curabitur consectetur suscipit urna, et accumsan sapien dapibus id. Sed id ornare diam.",
       time:"08:54",
       image:""},
-      { sent: 0,
+      { id:1,sent: 0,
         status:1,
         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget\
         rutrum diam. Curabitur consectetur suscipit urna, et accumsan sapien dapibus id. Sed id ornare diam.",
         time:"08:54",
         image:""},
-    { sent: 0,
+    { id:2,sent: 0,
         status:1,
         text: "Alô?",
         time:"08:54",
         image:""},
 
-    { sent: 1,
+    { id:3,sent: 1,
         status:1,
         text: "Se vira aí, meu querido",
         time:"08:54",
         image:""},
-    { sent: 1,
+    { id:4,sent: 1,
         status:1,
         text: "Aaaa bbbb ccckfjfdofhfhidh ",
         time:"08:54",
         image:""},
 
-    { sent: 0,
+    { id:5,sent: 0,
         status:1,
         text: "kkkkkkkkkkkkkkkkkkkkkkkkk",
         time:"08:54",
         image:""},
-    { sent: 0,
+    { id:6,sent: 0,
         status:0,
         text: "Aaaa bbbb ccckfjfdofhfhidh ",
         time:"08:54",
         image:""},
      ]
 
+firebase.initializeApp({
+    apiKey: "AIzaSyBEUKJRmFe7g966JT7qYlxW1Gj909XwIR4",
+    authDomain: "freela-chat.firebaseapp.com",
+    projectId: "freela-chat",
+    storageBucket: "freela-chat.appspot.com",
+    messagingSenderId: "564846707862",
+    appId: "1:564846707862:web:f581751573310b2af1eeb7",
+    measurementId: "G-LNEF47Y32C"
+})
+
+const firestore  = firebase.firestore();
+
 const ChatScreen = props=> {
   const [inputText, setInputText] = useState("");
+    let stompClient;
+    //const db = getDatabase();
+
+    const messagesRef = firestore.collection('messages');
+    const query = messagesRef.orderBy('createdAt');
+    const [messages] = useCollectionData(query, {idField:'id'});
+
+
+    const connect = (userId) => {
+
+        if (userId) {
+            const socket = new SockJS(`http://${Localhost.address}:${Localhost.port}/websocket`);
+            stompClient = Stomp.over(socket);
+
+            stompClient.connect({}, onConnected, onError);
+
+        }
+    }
+
+    const onConnected = () => {
+        console.log("onConnected");
+        // Subscribe to the Public Topic
+        stompClient.subscribe("/chat-response/response", onMessageReceived);
+
+        // Tell your username to the server
+        stompClient.send(
+            "/app-chat/send",
+            {},
+            JSON.stringify({ conteudo: "hello"})
+        );
+    }
+
+    const onMessageReceived = (payload) => {
+        console.log("onMessageReceived");
+        var message = JSON.parse(payload.body);
+        console.log(message);
+    }
+    const onError = (error) => {
+        console.log("Erro");
+        console.log(error);
+    };
+
 
   const sendButtonPressHandler = ()=>{
+      connect(1);
     data.unshift({ sent: 0,
       status:0,
       text: inputText,
@@ -75,7 +140,7 @@ const ChatScreen = props=> {
             renderItem={({item})=> 
                     (<ChatBubble
                     onPress={()=>{}}
-                    text={item.text}
+                    text={JSON.stringify(messages)}
                     side={item.sent}
                     time={item.time}
                     status={item.status}/>)}
